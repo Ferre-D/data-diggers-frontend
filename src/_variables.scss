@@ -2,3 +2,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
 
 $font-family-sans-serif: "Roboto", sans-serif;
+
+$rd-green: #00aa9c;
+$rd-dark-blue: #232d4b;
+$theme-colors: (
+  "rd-green": $rd-green,
+  "rd-dark-blue": $rd-dark-blue,
+);
