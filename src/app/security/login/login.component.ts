@@ -19,9 +19,8 @@ export class LoginComponent implements OnInit {
   working: AnimationOptions = {
     path: '/assets/working.json',
   };
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
-  }
+  animationCreated(animationItem: AnimationItem): void {}
+  submitted() {}
 
   ngOnInit(): void {}
 }

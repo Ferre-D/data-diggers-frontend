@@ -1,0 +1,66 @@
+<mat-sidenav-container mode="over" class="example-container">
+  <mat-sidenav class="left-sidenav" #sidenav mode="side" [(opened)]="opened">
+    <div class="d-flex flex-column wrapper h-100">
+      <div class="logo-div mt-3">
+        <img src="../../assets/logo.svg" alt="logo" />
+      </div>
+      <div
+        class="d-flex flex-column justify-content-around mt-5 nav-items align-items-center"
+      >
+        <div
+          class="d-flex active nav-item my-4 align-items-center justify-content-start"
+        >
+          <div class="pr-4"><i class="fas fa-th-large fa-2x nav-icon"></i></div>
+          <div class="nav-text">Dashboard</div>
+        </div>
+        <div
+          class="d-flex nav-item my-4 align-items-center justify-content-start"
+        >
+          <div class="pr-4"><i class="fas fa-parking fa-2x nav-icon"></i></div>
+          <div class="nav-text">Parking</div>
+        </div>
+        <div
+          class="d-flex nav-item my-4 align-items-center justify-content-start"
+        >
+          <div class="pr-4"><i class="fas fa-clock fa-2x nav-icon"></i></div>
+          <div class="nav-text">Reserve</div>
+        </div>
+        <div
+          class="d-flex nav-item my-4 align-items-center justify-content-start"
+        >
+          <div class="pr-4"><i class="fas fa-cog fa-2x nav-icon"></i></div>
+          <div class="nav-text">Settings</div>
+        </div>
+      </div>
+      <div class="logout">
+        <div class="logout-text">Sign out</div>
+        <i class="fas fa-sign-out-alt fa-2x logout-icon"></i>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav
+    class="right-sidenav"
+    #endsidenav
+    mode="side"
+    [(opened)]="openedNav2"
+    position="end"
+  >
+    <div class="w-100 mt-3 px-2"><h3 class="filter-title">Filter</h3></div>
+    <div class="d-flex filter-days">
+      <p class="filter-active">All time</p>
+      <p>90 Days</p>
+      <p>30 Days</p>
+    </div>
+    <div class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selected"></mat-calendar>
+    </div>
+    <div class="w-100">
+      <button class="btn btn-rd-green float-left" (click)="clearDate()">
+        clear date
+      </button>
+    </div>
+  </mat-sidenav>
+  <div class="mat-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

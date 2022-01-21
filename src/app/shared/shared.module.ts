@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 export function playerFactory() {
   return player;
@@ -12,9 +13,10 @@ export function playerFactory() {
   declarations: [],
   imports: [
     CommonModule,
+    FormsModule,
     HttpClientModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
-  exports: [CommonModule, HttpClientModule, LottieModule],
+  exports: [FormsModule, CommonModule, HttpClientModule, LottieModule],
 })
 export class SharedModule {}

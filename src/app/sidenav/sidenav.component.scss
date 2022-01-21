@@ -1,0 +1,105 @@
+@import "../../variables";
+.mat-content {
+  min-height: 100vh;
+  max-height: 100vh;
+}
+mat-sidenav {
+  border-right: none;
+  background: white;
+  color: black;
+  padding: 16px;
+  text-align: center;
+  border: none;
+}
+.left-sidenav {
+  width: 270px;
+}
+.right-sidenav {
+  width: 300px;
+}
+.demo-inline-calendar-card {
+  width: 100%;
+}
+.logo-div {
+  margin: 0 auto;
+  width: 60%;
+  img {
+    width: 100%;
+  }
+}
+.filter-days {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 2rem;
+  align-items: center;
+  p {
+    width: 57px;
+    height: 27px;
+    margin: 0;
+    border-radius: 50px;
+    font-size: 11px;
+    padding: 5px 2px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgba($color: $rd-green, $alpha: 0.5);
+  }
+  .filter-active {
+    background-color: $rd-green !important;
+  }
+}
+.filter-title {
+  border-bottom: 5px solid $rd-green;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: start;
+}
+.nav-item {
+  cursor: pointer;
+  width: 200px;
+}
+.active {
+  .nav-icon {
+    color: $rd-green !important;
+  }
+  .nav-text {
+    color: black !important;
+  }
+}
+.nav-icon {
+  color: rgba($color: #000000, $alpha: 0.14);
+}
+.nav-text {
+  font-weight: bold;
+  color: rgba($color: #000000, $alpha: 0.26);
+  font-size: 24px;
+}
+.logout-text {
+  border-right: 4px solid $rd-green;
+  font-weight: bold;
+  color: black;
+  font-size: 24px;
+  padding-right: 8px;
+  margin: 5px;
+}
+.logout {
+  border-top: 6px solid $rd-green;
+  width: 100%;
+  position: absolute;
+  padding-top: 8px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logout-icon {
+  padding-left: 5px;
+  color: black;
+}
+.justify-self-end {
+  justify-self: end !important;
+}
+
+.wrapper {
+  position: relative;
+}

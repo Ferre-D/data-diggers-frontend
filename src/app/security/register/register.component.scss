@@ -1,0 +1,34 @@
+@import "../../../variables";
+
+.bg-pattern {
+  min-width: 100vw;
+  min-height: 100vh;
+  background: $rd-dark-blue;
+}
+.form-div {
+  margin-top: -40px;
+}
+// .animation-bg {
+//   width: 10rem;
+//   height: 10rem;
+//   background-color: $rd-green;
+//   position: absolute;
+//   border-radius: 50%;
+//   transform: translateY(-68px);
+// }
+
+.animation {
+  width: 9rem;
+  height: 9rem;
+  overflow: hidden;
+  background-color: $rd-dark-blue;
+  border-radius: 50%;
+  transform: translateY(-70px);
+}
+.register-box {
+  -webkit-box-shadow: 0px 2px 10px 2px rgba(34, 34, 34, 0.62);
+  box-shadow: 0px 2px 10px 2px rgba(34, 34, 34, 0.62);
+  border-radius: 5px;
+}
+@media screen and (min-width: 768px) {
+}

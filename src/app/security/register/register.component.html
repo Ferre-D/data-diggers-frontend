@@ -1,1 +1,59 @@
-<p>register works!</p>
+<div
+  class="d-flex align-items-center container justify-content-center bg-pattern"
+>
+  <div class="mx-auto w-25 bg-white register-box">
+    <div class="row">
+      <div class="col-12 justify-content-center d-flex">
+        <div class="animation-bg"></div>
+        <div class="animation">
+          <ng-lottie
+            class="animationItem"
+            [options]="profile"
+            (animationCreated)="animationCreated($event)"
+          ></ng-lottie>
+        </div>
+      </div>
+      <div class="col-12 form-div">
+        <form (ngSubmit)="play()" #loginForm="ngForm" class="p-2 px-4">
+          <div class="form-row py-2">
+            <div class="col">
+              <label for="firstname">First name</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="col">
+              <label for="firstname">Last Name</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group py-2">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" />
+          </div>
+          <div class="form-group py-2">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group py-2">
+            <label for="password">Confirm password</label>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              class="form-control"
+            />
+          </div>
+          <input
+            type="submit"
+            class="btn btn-rd-green w-100 rounded"
+            value="Sign up"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

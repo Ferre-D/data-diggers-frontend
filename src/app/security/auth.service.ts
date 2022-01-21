@@ -19,6 +19,8 @@ export class AuthService {
       return {
         id: parseInt(localStorage.getItem('id') ?? '0'),
         email: localStorage.getItem('email') ?? '',
+        lastname: localStorage.getItem('lastname') ?? '',
+        firstName: localStorage.getItem('firstName') ?? '',
         password: '',
         token: this.getToken(),
       };

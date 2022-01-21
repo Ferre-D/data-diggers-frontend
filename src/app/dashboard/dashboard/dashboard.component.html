@@ -1,0 +1,109 @@
+<div class="w-100 bg-light">
+  <div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+    <h3 class="text-white mt-2">Dashboard</h3>
+    <p class="text-white">
+      Welcome Ferre to the
+      <span class="text-rd-green">Prins boudewijnlaan</span> dashboard.
+    </p>
+    <p class="text-white">
+      Here you can find a bunch of useful and intersting information about the
+      road.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-4">
+        <div class="kpi-card mx-auto">
+          <div class="icon-circle">
+            <i class="fas fa-car kpi-icon"></i>
+          </div>
+          <div><p class="kpi-text">622</p></div>
+          <div><p class="kpi-label">Cars passed</p></div>
+          <div class="kpi-green">
+            <p class="kpi-change pr-1"><i class="fas fa-caret-up"></i> 22%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="kpi-card mx-auto">
+          <div class="icon-circle">
+            <i class="fas fa-truck kpi-icon"></i>
+            <div><p class="kpi-change"></p></div>
+          </div>
+          <div><p class="kpi-text">314</p></div>
+          <div><p class="kpi-label">Trucks passed</p></div>
+          <div class="kpi-red">
+            <p class="kpi-change"><i class="fas fa-caret-down pr-1"></i>14%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="kpi-card mx-auto">
+          <div class="icon-circle">
+            <i class="fas fa-bicycle kpi-icon"></i>
+          </div>
+          <div><p class="kpi-text">116</p></div>
+          <div><p class="kpi-label">Bikes passed</p></div>
+          <div class="kpi-green">
+            <p class="kpi-change"><i class="fas fa-caret-up pr-1"></i> 8%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row graph-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="row h-100">
+          <div class="col-sm-12">
+            <div class="graph">
+              <p class="align-self-start ml-4 chart-title mb-0">
+                AVG Cars VS Bikes
+              </p>
+              <div class="cv-chart-1">
+                <canvas
+                  baseChart
+                  [data]="lineChartData"
+                  [type]="lineChartType"
+                  [options]="lineGraphOptions"
+                  [legend]="legend"
+                >
+                </canvas>
+              </div>
+              <div class="d-flex align-self-center justify-content-center">
+                <app-legend-item
+                  *ngFor="let item of lineData"
+                  [color]="item.color"
+                  [title]="item.label"
+                ></app-legend-item>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 d-flex">
+            <div class="graph align-self-end">
+              <h3 class="text-center">T.B.D.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="chart py-4">
+          <p class="align-self-start ml-4 chart-title mb-0">Trend chart</p>
+          <canvas
+            baseChart
+            [data]="doughnutChartData"
+            [type]="doughnutChartType"
+            [options]="doughnutChartOptions"
+            [legend]="legend"
+          >
+          </canvas>
+          <div class="d-flex align-self-center justify-content-center">
+            <app-legend-item
+              *ngFor="let item of doughnutData"
+              [color]="item.color"
+              [title]="item.label"
+            ></app-legend-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
