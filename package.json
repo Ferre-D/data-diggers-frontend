@@ -1,6 +1,10 @@
 {
   "name": "data-diggers",
   "version": "0.0.0",
+  "engines": {
+    "node": "14.17.6",
+    "npm": "6.14.15"
+  },
   "scripts": {
     "heroku-postbuild": "ng build --prod",
     "ng": "ng",
