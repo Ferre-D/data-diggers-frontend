@@ -13,14 +13,17 @@ export class AuthService {
   getToken(): string {
     return localStorage.getItem('token') ?? '';
   }
-
+  rooturl: string = 'http://localhost:3000/';
+  getUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>(this.rooturl + 'users/' + id.toString());
+  }
   getUser(): User | null {
     if (this.isLoggedIn()) {
       return {
         id: parseInt(localStorage.getItem('id') ?? '0'),
         email: localStorage.getItem('email') ?? '',
         lastname: localStorage.getItem('lastname') ?? '',
-        firstName: localStorage.getItem('firstName') ?? '',
+        firstname: localStorage.getItem('firstName') ?? '',
         password: '',
         token: this.getToken(),
       };

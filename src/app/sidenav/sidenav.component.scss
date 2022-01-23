@@ -66,6 +66,9 @@ mat-sidenav {
     color: black !important;
   }
 }
+a:hover {
+  text-decoration: none;
+}
 .nav-icon {
   color: rgba($color: #000000, $alpha: 0.14);
 }

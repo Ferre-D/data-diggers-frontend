@@ -12,6 +12,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -20,13 +21,13 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
     MatRippleModule,
     BrowserModule,
     MatSidenavModule,
-    AppRoutingModule,
     MatDatepickerModule,
     MatCardModule,
     SharedModule,
     DashboardModule,
     SecurityModule,
     BrowserAnimationsModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

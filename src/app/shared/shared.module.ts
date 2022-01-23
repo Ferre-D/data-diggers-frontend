@@ -4,6 +4,7 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app-routing.module';
 
 export function playerFactory() {
   return player;
@@ -12,11 +13,18 @@ export function playerFactory() {
 @NgModule({
   declarations: [],
   imports: [
+    AppRoutingModule,
     CommonModule,
     FormsModule,
     HttpClientModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
-  exports: [FormsModule, CommonModule, HttpClientModule, LottieModule],
+  exports: [
+    FormsModule,
+    AppRoutingModule,
+    CommonModule,
+    HttpClientModule,
+    LottieModule,
+  ],
 })
 export class SharedModule {}

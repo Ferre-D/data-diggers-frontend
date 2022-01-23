@@ -8,6 +8,7 @@ import {
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
@@ -23,7 +24,18 @@ export class SidenavComponent implements AfterViewInit {
   openedNav2 = true;
   selected!: Date | null;
   small!: boolean;
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  path: string = '';
+  disabled!: boolean;
+  constructor(
+    private observer: BreakpointObserver,
+    private location: Location,
+    private router: Router
+  ) {
+    this.router.events.subscribe((val) => {
+      this.path = this.location.path();
+      this.disabled = this.path.includes('settings');
+    });
+  }
   clearDate() {
     this.selected = null;
   }
