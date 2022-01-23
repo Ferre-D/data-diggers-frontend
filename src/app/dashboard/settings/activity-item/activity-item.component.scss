@@ -1,0 +1,51 @@
+@import "../../../../variables";
+.activity-item {
+  border-bottom: 2px solid rgba($color: #000000, $alpha: 0.25);
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+  div {
+    margin-right: 5rem;
+  }
+}
+.date-div {
+  width: 150px;
+}
+.user-div {
+  width: 220px;
+  * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+.user {
+  color: $rd-green;
+  font-size: 14px;
+}
+.user-email {
+  font-size: 10px;
+  color: rgba($color: #000000, $alpha: 0.5);
+}
+a {
+  text-decoration: none;
+  margin: 0;
+}
+.view-btn {
+  cursor: pointer;
+}
+.Deleted {
+  font-weight: bold;
+  color: #ff6756;
+}
+.Updated {
+  font-weight: bold;
+  color: #729aef;
+}
+.Created {
+  font-weight: bold;
+  color: #8ce66b;
+}
+.justify-self-end {
+  justify-self: end !important;
+}

@@ -1,0 +1,65 @@
+@import "../../../variables";
+.welcome {
+  height: 240px;
+  p {
+    margin: 0;
+  }
+}
+.card {
+  width: 70%;
+  height: 200px;
+  border-radius: 5px;
+  background: #fff;
+  transform: translateY(-70px);
+  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p {
+    margin: 0;
+    line-height: 2.1rem;
+  }
+  h3 {
+    font-size: 38px;
+    font-weight: bold;
+  }
+  .alt-text {
+    font-weight: bold;
+    color: rgba($color: #000000, $alpha: 0.25);
+    font-size: 20px;
+  }
+  .details-text {
+    color: $rd-green;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
+a:hover {
+  text-decoration: none !important;
+}
+.activity-card {
+  margin-top: 3rem;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+}
+.table-header {
+  border-bottom: 2px solid rgba($color: #000000, $alpha: 0.25);
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+  div {
+    margin-right: 5rem;
+  }
+}
+.account-div {
+  width: 220px;
+}
+.date-div {
+  width: 150px;
+}

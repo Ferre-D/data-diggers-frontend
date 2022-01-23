@@ -1,0 +1,24 @@
+<div class="activity-item w-100 px-3">
+  <div class="d-flex align-items-center w-100">
+    <div class="date-div">
+      <p>{{ activity.created_at }}</p>
+    </div>
+    <div class="user-div">
+      <a class="user">{{ user.firstname }} {{ user.lastname }}</a>
+      <p class="user-email">{{ user.email }}</p>
+    </div>
+    <div>
+      <p>
+        <span [ngClass]="activity.action">
+          {{ activity.action }}
+        </span>
+        {{ activity.description }}
+      </p>
+    </div>
+    <div class="m-0 ml-auto">
+      <a *ngIf="activity.action != 'Deleted'" class="text-rd-green view-btn"
+        ><strong>View</strong></a
+      >
+    </div>
+  </div>
+</div>

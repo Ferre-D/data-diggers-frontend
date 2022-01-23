@@ -1,0 +1,81 @@
+<div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+  <h3 class="text-white mt-2">Admin</h3>
+  <p class="text-white">
+    Welcome to the
+    <span class="text-rd-green">admin</span> page.
+  </p>
+  <p class="text-white">
+    Here you can find and manage a bunch of useful and interesting information.
+  </p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6">
+      <div class="card mx-auto">
+        <div class="w-50">
+          <ng-lottie
+            [options]="painting"
+            (animationCreated)="animationCreated($event)"
+          ></ng-lottie>
+        </div>
+        <div class="w-50 text-center">
+          <h3 class="text-center">8</h3>
+          <p class="alt-text">Themes created</p>
+          <a class="float-right details-text pr-4">
+            Details <i class="fas fa-long-arrow-alt-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+      <div class="card mx-auto">
+        <div class="w-50">
+          <ng-lottie
+            [options]="users"
+            (animationCreated)="animationCreated($event)"
+          ></ng-lottie>
+        </div>
+        <div class="w-50 text-center">
+          <h3 class="text-center">23</h3>
+          <p class="alt-text">Users created</p>
+          <a class="float-right details-text pr-4">
+            Details <i class="fas fa-long-arrow-alt-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="activity-card mx-auto">
+        <div class="table-header">
+          <div class="activity-item w-100 px-3">
+            <div class="d-flex align-items-center w-100">
+              <div class="date-div">
+                <p>Date and time</p>
+              </div>
+              <div class="account-div">
+                <p>Account</p>
+              </div>
+              <div>
+                <p>Description</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-activity-item
+          *ngFor="let activity of activities"
+          [activity]="activity"
+        ></app-activity-item>
+        <mat-paginator
+          [length]="100"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 5, 25, 100]"
+          aria-label="Select page"
+          [hidePageSize]="true"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
