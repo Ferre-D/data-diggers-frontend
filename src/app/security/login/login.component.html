@@ -13,7 +13,15 @@
         <form (ngSubmit)="submitted()" #loginForm="ngForm" class="p-2 px-4">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" />
+            <input
+              type="email"
+              email
+              name="email"
+              [(ngModel)]="user.email"
+              required
+              id="email"
+              class="form-control"
+            />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
@@ -21,6 +29,8 @@
               id="password"
               name="password"
               type="password"
+              required
+              [(ngModel)]="user.password"
               class="form-control"
             />
             <a href="" class="small">Forgot password</a>
@@ -29,8 +39,19 @@
             type="submit"
             class="btn btn-rd-green w-100 rounded"
             value="Login"
+            [disabled]="!loginForm.form.valid || isSubmitted"
           />
         </form>
+        <div class="w-100 px-4">
+          <small class="float-right"
+            ><a
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="/signup"
+              >Create new account.</a
+            ></small
+          >
+        </div>
       </div>
     </div>
   </div>

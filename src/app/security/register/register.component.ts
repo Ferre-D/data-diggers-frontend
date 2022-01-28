@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { AuthService } from '../auth.service';
+import { User } from '../user';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +19,33 @@ import { AuthService } from '../auth.service';
   `,
 })
 export class RegisterComponent implements OnInit {
+  user: User = {
+    id: 0,
+    email: '',
+    lastName: '',
+    firstName: '',
+    password: '',
+    activities: [
+      {
+        id: 0,
+        userId: 0,
+        description: '',
+        created_at: new Date(),
+        action: '',
+      },
+    ],
+    userLevel: 2,
+    token: '',
+  };
+  confirmPassword: String = '';
+  submitted: boolean = false;
   private animationItem!: AnimationItem;
-  constructor() {}
+  constructor(
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private router: Router,
+    private ngZone: NgZone
+  ) {}
   profile: AnimationOptions = {
     path: '/assets/profile.json',
   };
@@ -28,6 +57,33 @@ export class RegisterComponent implements OnInit {
   play() {
     this.animationItem.play();
   }
+  submit() {
+    if (this.confirmPassword != this.user.password)
+      return this.toastr.error("The passwords don't match!");
+    this.submitted = true;
+    return this.authService.register(this.user).subscribe(
+      (result) => {
+        this.submitted = false;
+        localStorage.setItem('id', result.id.toString());
+        localStorage.setItem('email', result.email.toString());
+        localStorage.setItem('userLevel', result.userLevel.toString());
+        localStorage.setItem('firstName', result.firstName.toString());
+        localStorage.setItem('lastName', result.lastName.toString());
+        localStorage.setItem('token', result.token.toString());
 
+        this.animationItem.play();
+      },
+      (error) => {
+        this.toastr.error('Something went wrong...', 'Error');
+      }
+    );
+  }
+  public onAnimationEnd() {
+    console.log(localStorage.getItem('token'));
+
+    this.ngZone.run(() => {
+      this.router.navigate(['/dashboard']);
+    });
+  }
   ngOnInit(): void {}
 }

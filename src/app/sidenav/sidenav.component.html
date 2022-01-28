@@ -1,5 +1,11 @@
 <mat-sidenav-container mode="over" class="example-container">
-  <mat-sidenav class="left-sidenav" #sidenav mode="side" [(opened)]="opened">
+  <mat-sidenav
+    *ngIf="!disabledLeft"
+    class="left-sidenav"
+    #sidenavStart
+    mode="side"
+    [(opened)]="opened"
+  >
     <div class="d-flex flex-column wrapper h-100">
       <div class="logo-div mt-3">
         <img src="../../assets/logo.svg" alt="logo" />
@@ -29,7 +35,7 @@
           <div class="nav-text">Reserve</div>
         </div>
         <a
-          [routerLinkActiveOptions]="{ exact: true }"
+          *ngIf="this.authService.isAdmin()"
           routerLink="/settings"
           routerLinkActive="active"
           class="d-flex nav-item my-4 align-items-center justify-content-start"
@@ -38,16 +44,16 @@
           <div class="nav-text">Settings</div>
         </a>
       </div>
-      <div class="logout">
+      <div class="logout" (click)="logOut()">
         <div class="logout-text">Sign out</div>
         <i class="fas fa-sign-out-alt fa-2x logout-icon"></i>
       </div>
     </div>
   </mat-sidenav>
   <mat-sidenav
-    *ngIf="!disabled"
+    *ngIf="!disabledRight"
     class="right-sidenav"
-    #endsidenav
+    #sidenavEnd
     mode="side"
     [(opened)]="openedNav2"
     position="end"

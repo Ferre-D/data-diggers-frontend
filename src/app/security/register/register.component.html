@@ -10,37 +10,63 @@
             class="animationItem"
             [options]="profile"
             (animationCreated)="animationCreated($event)"
+            (complete)="onAnimationEnd()"
           ></ng-lottie>
         </div>
       </div>
       <div class="col-12 form-div">
-        <form (ngSubmit)="play()" #loginForm="ngForm" class="p-2 px-4">
+        <form (ngSubmit)="submit()" #signupForm="ngForm" class="p-2 px-4">
           <div class="form-row py-2">
             <div class="col">
               <label for="firstname">First name</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                required
+                id="firstname"
+                name="firstname"
+                class="form-control"
+                [(ngModel)]="user.firstName"
+              />
             </div>
             <div class="col">
-              <label for="firstname">Last Name</label>
-              <input type="text" class="form-control" />
+              <label for="lastname">Last Name</label>
+              <input
+                type="text"
+                [(ngModel)]="user.lastName"
+                id="lastname"
+                name="lastname"
+                required
+                class="form-control"
+              />
             </div>
           </div>
           <div class="form-group py-2">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" />
-          </div>
-          <div class="form-group py-2">
-            <label for="password">Password</label>
             <input
-              id="password"
-              name="password"
-              type="password"
+              type="email"
+              [(ngModel)]="user.email"
+              required
+              id="email"
+              name="email"
               class="form-control"
             />
           </div>
           <div class="form-group py-2">
-            <label for="password">Confirm password</label>
+            <label for="password">Password</label>
             <input
+              [(ngModel)]="user.password"
+              id="password"
+              name="password"
+              type="password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group py-2">
+            <label for="confirm-password">Confirm password</label>
+            <input
+              required
+              [(ngModel)]="confirmPassword"
               id="confirm-password"
               name="confirm-password"
               type="password"
@@ -48,11 +74,23 @@
             />
           </div>
           <input
+            [disabled]="!signupForm.form.valid || submitted"
             type="submit"
             class="btn btn-rd-green w-100 rounded"
             value="Sign up"
           />
         </form>
+        <div class="px-4 float-right pb-2">
+          <small
+            >Already have an account?
+            <a
+              routerLink="/login"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Login</a
+            ></small
+          >
+        </div>
       </div>
     </div>
   </div>

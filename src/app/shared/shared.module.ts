@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { NgxColorsModule } from 'ngx-colors';
+import { MaterialModule } from '../material.module';
 
 export function playerFactory() {
   return player;
@@ -13,6 +15,9 @@ export function playerFactory() {
 @NgModule({
   declarations: [],
   imports: [
+    MaterialModule,
+    NgxColorsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
@@ -20,6 +25,9 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
   ],
   exports: [
+    MaterialModule,
+    NgxColorsModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     CommonModule,

@@ -1,0 +1,80 @@
+<div class="w-50 mx-auto pt-5">
+  <form
+    (ngSubmit)="onSubmit()"
+    class="bg-white p-4 style-form"
+    [formGroup]="themeForm"
+  >
+    <input type="hidden" formControlName="id" />
+    <div class="form-group">
+      <label for="logo">Logo</label>
+      <input
+        type="file"
+        id="logo"
+        class="form-control"
+        autocomplete="off"
+        (change)="onImageSelected($event)"
+        accept=".png, .jpg"
+      />
+      <div class="logo" *ngIf="imageSrc">
+        <img src="{{ imageSrc }}" alt="logo" />
+      </div>
+    </div>
+    <div class="text-primary">
+      <i class="fas fa-info-circle"></i> Please make sure the accent color is
+      readable when placed on the primary color. Check the example for
+      reference.
+    </div>
+    <div class="form-row my-2">
+      <div class="col d-flex align-items-center">
+        <label class="m-0 mx-2">Primary color</label>
+        <div>
+          <ngx-colors
+            ngx-colors-trigger
+            formControlName="primaryColor"
+          ></ngx-colors>
+        </div>
+      </div>
+      <div class="col d-flex align-items-center">
+        <label class="m-0 mx-2">Accent color</label>
+        <div>
+          <ngx-colors
+            ngx-colors-trigger
+            formControlName="accentColor"
+          ></ngx-colors>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      *ngIf="isAdd"
+      [disabled]="!themeForm.valid || isSubmitted"
+    >
+      Add
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      *ngIf="isEdit"
+      [disabled]="!themeForm.valid || isSubmitted"
+    >
+      Save
+    </button>
+    <div class="mb-2 mt-4">
+      <mat-progress-bar
+        mode="determinate"
+        value="{{ uploadProgress }}"
+      ></mat-progress-bar>
+    </div>
+  </form>
+</div>
+<div class="reference" [style.backgroundColor]="themeForm.value.primaryColor">
+  <p class="m-0 p-2">
+    Take a look at this
+    <span class="" [style.color]="themeForm.value.accentColor">
+      reference
+    </span>
+    and make sure the text is readable
+  </p>
+</div>

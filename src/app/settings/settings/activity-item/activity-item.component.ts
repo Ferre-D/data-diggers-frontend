@@ -14,7 +14,7 @@ export class ActivityItemComponent implements OnInit {
     userId: 0,
     action: '',
     description: '',
-    created_at: '',
+    created_at: new Date(),
   };
   user!: User;
   constructor(private authServie: AuthService) {}

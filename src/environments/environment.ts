@@ -3,7 +3,22 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Import the functions you need from the SDKs you need
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  firebaseConfig: {
+    apiKey: 'AIzaSyAlyRLCqHVnFIFzhfKm2Fc8XiMrcN9aAow',
+    authDomain: 'data-diggers.firebaseapp.com',
+    projectId: 'data-diggers',
+    storageBucket: 'data-diggers.appspot.com',
+    messagingSenderId: '34097409267',
+    appId: '1:34097409267:web:ecd7efddb23288191d9b86',
+    measurementId: 'G-E7BCLLNCG5',
+  },
 };
 
 /*

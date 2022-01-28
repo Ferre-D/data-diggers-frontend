@@ -1,0 +1,23 @@
+@import "../../../../variables";
+.welcome {
+  height: 240px;
+  p {
+    margin: 0;
+  }
+}
+.btn-theme {
+  color: #fff;
+  background-color: $rd-green;
+}
+.color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.logo {
+  width: 150px;
+}
+.table th {
+  border-top: 0 !important;
+}

@@ -1,0 +1,95 @@
+<div class="w-100 bg-light">
+  <div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+    <h3 class="text-white mt-2">Themes</h3>
+    <p class="text-white">
+      Welcome to the
+      <span class="text-rd-green">themes</span> list.
+    </p>
+    <p class="text-white">
+      Here you can find and customize all of your themes.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="mx-auto">
+          <div class="my-2">
+            <button
+              (click)="add()"
+              class="my-2 float-right btn border-0 btn-rd-green"
+            >
+              New theme
+            </button>
+          </div>
+          <table class="table my-3">
+            <thead>
+              <tr>
+                <th scope="col">Logo</th>
+                <th scope="col">Primary color</th>
+                <th scope="col">Accent color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let theme of themes">
+                <td class="logo">
+                  <img
+                    class="w-100 h-100"
+                    src="{{ theme.logoUrl }}"
+                    alt="logo"
+                  />
+                </td>
+                <td>
+                  <div
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ theme.primaryColor }}"
+                    class="color"
+                    [style.backgroundColor]="theme.primaryColor"
+                  ></div>
+                </td>
+                <td>
+                  <div
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ theme.accentColor }}"
+                    class="color"
+                    [style.backgroundColor]="theme.accentColor"
+                  ></div>
+                </td>
+                <td>
+                  <div class="float-right">
+                    <button
+                      class="btn btn-theme px-2 mx-2"
+                      *ngIf="!theme.active"
+                    >
+                      Activate
+                    </button>
+                    <button
+                      class="btn btn-theme px-2 mx-2"
+                      *ngIf="theme.active"
+                      disabled
+                    >
+                      Activate
+                    </button>
+                    <button
+                      (click)="edit(theme.id)"
+                      class="btn btn-theme px-2 mx-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      (click)="delete(theme.id)"
+                      class="btn btn-theme px-2 mx-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,5 +3,5 @@ export interface Activity {
   userId: number;
   action: string;
   description: string;
-  created_at: string;
+  created_at: Date;
 }
