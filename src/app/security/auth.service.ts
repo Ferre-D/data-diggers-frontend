@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { Observable } from 'rxjs';
 import { UserResponse } from './userResponse';
+import { count } from '../settings/count';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,12 @@ export class AuthService {
   getToken(): string {
     return localStorage.getItem('token') ?? '';
   }
-  rooturl: string = 'https://p40backend.azurewebsites.net/api/users/';
+  rootUrl: string = 'https://p40backend.azurewebsites.net/api/users/';
   getUserById(id: number): Observable<User> {
     let headers = new HttpHeaders();
     let bearer = 'bearer ' + this.getToken();
     headers = headers.set('Authorization', bearer);
-    return this.httpClient.get<User>(this.rooturl + id.toString(), { headers });
+    return this.httpClient.get<User>(this.rootUrl + id.toString(), { headers });
   }
   getUser(): User | null {
     if (this.isLoggedIn()) {
@@ -47,10 +48,16 @@ export class AuthService {
   }
 
   authenticate(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.rooturl + 'authenticate', user);
+    return this.httpClient.post<User>(this.rootUrl + 'authenticate', user);
   }
 
   register(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.rooturl, user);
+    return this.httpClient.post<User>(this.rootUrl, user);
+  }
+  count(): Observable<count> {
+    let headers = new HttpHeaders();
+    let bearer = 'bearer ' + this.getToken();
+    headers = headers.set('Authorization', bearer);
+    return this.httpClient.get<count>(this.rootUrl + 'count');
   }
 }

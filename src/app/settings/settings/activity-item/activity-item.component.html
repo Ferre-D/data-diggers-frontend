@@ -1,7 +1,7 @@
-<div class="activity-item w-100 px-3">
+<div class="activity-item w-100 px-3" *ngIf="user">
   <div class="d-flex align-items-center w-100">
     <div class="date-div">
-      <p>{{ activity.created_at }}</p>
+      <p>{{ dateString }}</p>
     </div>
     <div class="user-div">
       <a class="user">{{ user.firstName }} {{ user.lastName }}</a>
@@ -16,7 +16,10 @@
       </p>
     </div>
     <div class="m-0 ml-auto">
-      <a *ngIf="activity.action != 'Deleted'" class="text-rd-green view-btn"
+      <a
+        *ngIf="activity.action"
+        (click)="detail()"
+        class="text-rd-green view-btn"
         ><strong>View</strong></a
       >
     </div>

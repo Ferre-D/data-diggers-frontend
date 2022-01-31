@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/security/auth.service';
+import { count } from '../count';
 import { Theme } from './theme';
 
 @Injectable({
@@ -13,11 +15,16 @@ export class ThemesService {
   constructor(private httpClient: HttpClient) {}
 
   getThemes(): Observable<Theme[]> {
-    return this.httpClient.get<Theme[]>(this.rootUrl);
+    return timer(1, 2200).pipe(
+      switchMap(() => this.httpClient.get<Theme[]>(this.rootUrl))
+    );
   }
 
   getThemeById(id: number): Observable<Theme> {
     return this.httpClient.get<Theme>(this.rootUrl + id);
+  }
+  getActiveTheme(): Observable<Theme> {
+    return this.httpClient.get<Theme>(this.rootUrl + 'active');
   }
 
   postTheme(theme: Theme): Observable<Theme> {
@@ -40,5 +47,8 @@ export class ThemesService {
 
   deleteTheme(id: number): Observable<Theme> {
     return this.httpClient.delete<Theme>(this.rootUrl + id);
+  }
+  count(): Observable<count> {
+    return this.httpClient.get<count>(this.rootUrl + 'count');
   }
 }

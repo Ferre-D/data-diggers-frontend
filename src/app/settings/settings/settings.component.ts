@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { AuthService } from 'src/app/security/auth.service';
 import { Activity } from '../activity';
 import { ActivityService } from '../activity.service';
+import { ThemesService } from '../themes/themes.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +18,13 @@ import { ActivityService } from '../activity.service';
   `,
 })
 export class SettingsComponent implements OnInit {
-  constructor(private activityService: ActivityService) {}
+  countThemes: number = 0;
+  countUsers: number = 0;
+  constructor(
+    private activityService: ActivityService,
+    private themesService: ThemesService,
+    private authService: AuthService
+  ) {}
   activities: Activity[] = [];
 
   users: AnimationOptions = {
@@ -28,6 +36,12 @@ export class SettingsComponent implements OnInit {
   animationCreated(animationItem: AnimationItem): void {}
 
   ngOnInit(): void {
+    this.themesService
+      .count()
+      .subscribe((result) => (this.countThemes = result.count));
+    this.authService
+      .count()
+      .subscribe((result) => (this.countUsers = result.count));
     this.activityService.getActivities().subscribe((result) => {
       this.activities = result;
     });

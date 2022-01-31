@@ -1,4 +1,4 @@
-<mat-sidenav-container mode="over" class="example-container">
+<mat-sidenav-container mode="over" class="example-container" *ngIf="theme">
   <mat-sidenav
     *ngIf="!disabledLeft"
     class="left-sidenav"
@@ -8,7 +8,7 @@
   >
     <div class="d-flex flex-column wrapper h-100">
       <div class="logo-div mt-3">
-        <img src="../../assets/logo.svg" alt="logo" />
+        <img src="{{ theme.logoUrl }}" alt="logo" />
       </div>
       <div
         class="d-flex flex-column justify-content-around mt-5 nav-items align-items-center"
@@ -77,3 +77,9 @@
     <router-outlet></router-outlet>
   </div>
 </mat-sidenav-container>
+<div class="loading" *ngIf="!theme">
+  <div>
+    <p class="text-center"><i class="fas fa-circle-notch fa-spin"></i></p>
+    <p>Loading...</p>
+  </div>
+</div>

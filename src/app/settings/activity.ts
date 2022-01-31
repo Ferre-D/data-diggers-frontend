@@ -1,6 +1,6 @@
 export interface Activity {
   id: number;
-  userId: number;
+  usersId: number;
   action: string;
   description: string;
   created_at: Date;

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     activities: [
       {
         id: 0,
-        userId: 0,
+        usersId: 0,
         description: '',
         created_at: new Date(),
         action: '',

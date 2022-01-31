@@ -11,6 +11,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../security/auth.service';
+import { ThemesService } from '../settings/themes/themes.service';
+import { Theme } from '../settings/themes/theme';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -18,7 +21,10 @@ import { AuthService } from '../security/auth.service';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatSidenav)
+  themes$: Subscription = new Subscription();
+  themes: Theme[] = [];
+  theme!: Theme;
+  @ViewChild('sidenavStart')
   sidenavStart!: MatSidenav;
   @ViewChild('sidenavEnd')
   sidenavEnd!: MatSidenav;
@@ -30,11 +36,13 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   disabledRight: boolean = false;
   disabledLeft: boolean = false;
   constructor(
+    private themesService: ThemesService,
     private observer: BreakpointObserver,
     private location: Location,
     private router: Router,
     public authService: AuthService
   ) {
+    if (this.location.path() == '') this.router.navigateByUrl('/dashboard');
     this.router.events.subscribe((val) => {
       this.path = this.location.path();
       this.disabledRight =
@@ -45,7 +53,15 @@ export class SidenavComponent implements AfterViewInit, OnInit {
         this.path.includes('login') || this.path.includes('signup');
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.themes$ = this.themesService.getThemes().subscribe((result) => {
+      this.themes = result;
+      this.themes = this.themes.filter((t) => {
+        return (t.active = true);
+      });
+      this.theme = this.themes[0];
+    });
+  }
   clearDate() {
     this.selected = null;
   }
@@ -62,6 +78,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
         }
         if (this.disabledRight == false) {
           this.sidenavEnd.mode = 'over';
+          this.sidenavEnd.close();
         }
         this.small = true;
       } else {

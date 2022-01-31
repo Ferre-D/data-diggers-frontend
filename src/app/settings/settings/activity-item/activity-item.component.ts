@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
 import { User } from 'src/app/security/user';
 import { Activity } from '../../activity';
@@ -9,19 +10,21 @@ import { Activity } from '../../activity';
   styleUrls: ['./activity-item.component.scss'],
 })
 export class ActivityItemComponent implements OnInit {
-  @Input() activity: Activity = {
-    id: 0,
-    userId: 0,
-    action: '',
-    description: '',
-    created_at: new Date(),
-  };
+  @Input() activity!: Activity;
   user!: User;
-  constructor(private authServie: AuthService) {}
+  dateString!: string;
+  constructor(private authServie: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    console.log(this.activity);
+    console.log(this.activity.usersId);
+    this.dateString = new Date(this.activity.created_at).toLocaleDateString();
+
     this.authServie
-      .getUserById(this.activity!.userId)
+      .getUserById(this.activity?.usersId)
       .subscribe((result) => (this.user = result));
+  }
+  detail() {
+    this.router.navigateByUrl('/settings/themes/edittheme/' + this.activity.id);
   }
 }
