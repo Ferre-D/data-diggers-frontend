@@ -40,7 +40,10 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getThemes();
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.themes$.unsubscribe();
+    this.deleteTheme$.unsubscribe();
+  }
   getThemes() {
     this.themes$ = this.themesService
       .getThemes()

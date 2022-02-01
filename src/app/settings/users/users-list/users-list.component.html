@@ -1,0 +1,69 @@
+<div class="w-100 bg-light">
+  <div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+    <h3 class="text-white mt-2">Users</h3>
+    <p class="text-white">
+      Welcome to the
+      <span class="text-rd-green">users</span> list.
+    </p>
+    <p class="text-white">Here you can find and customize all of your users.</p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="mx-auto">
+          <div class="my-2">
+            <button
+              (click)="add()"
+              class="my-2 float-right btn border-0 btn-rd-green"
+            >
+              New user
+            </button>
+          </div>
+          <table class="table my-3">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Admin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td class="">{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <mat-slide-toggle
+                    *ngIf="user.userLevel == 2"
+                    checked="false"
+                    disabled
+                  ></mat-slide-toggle>
+                  <mat-slide-toggle
+                    *ngIf="user.userLevel == 1"
+                    checked="true"
+                    disabled
+                  ></mat-slide-toggle>
+                </td>
+                <td>
+                  <div class="float-right">
+                    <button
+                      (click)="edit(user.id)"
+                      class="btn btn-user px-2 mx-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      (click)="delete(user.id)"
+                      class="btn btn-user px-2 mx-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

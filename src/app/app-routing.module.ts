@@ -9,6 +9,8 @@ import { RegisterComponent } from './security/register/register.component';
 import { SettingsComponent } from './settings/settings/settings.component';
 import { ThemesListComponent } from './settings/themes/themes-list/themes-list.component';
 import { ThemesFormComponent } from './settings/themes/themes-form/themes-form.component';
+import { UsersFormComponent } from './settings/users/users-form/users-form.component';
+import { UsersListComponent } from './settings/users/users-list/users-list.component';
 
 const routes: Routes = [
   {
@@ -46,12 +48,32 @@ const routes: Routes = [
   {
     path: 'settings/themes/newtheme',
     component: ThemesFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
+    canActivateChild: [AuthGuard, AdminGuard],
   },
   {
     path: 'settings/themes/edittheme/:id',
     component: ThemesFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
+    canActivateChild: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'settings/users',
+    component: UsersListComponent,
+    canActivate: [AuthGuard, AdminGuard],
+    canActivateChild: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'settings/users/newuser',
+    component: UsersFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+    canActivateChild: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'settings/users/edituser/:id',
+    component: UsersFormComponent,
+    canActivate: [AuthGuard, AdminGuard],
+    canActivateChild: [AuthGuard, AdminGuard],
   },
 ];
 

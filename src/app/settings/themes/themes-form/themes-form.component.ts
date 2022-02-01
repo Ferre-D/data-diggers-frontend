@@ -134,7 +134,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
         );
     }
     if (this.isEdit) {
-      this.postTheme$ = this.themesService
+      this.putTheme$ = this.themesService
         .putTheme(this.themeId, this.themeForm.value)
         .subscribe(
           (result) => {
