@@ -1,11 +1,16 @@
-<div class="w-100 bg-light">
-  <div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
-    <h3 class="text-white mt-2">Themes</h3>
-    <p class="text-white">
+<div class="w-100 bg-light" *ngIf="theme | async as t">
+  <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
+    <h3
+      class="mt-2"
+      [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+    >
+      Themes
+    </h3>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
       Welcome to the
-      <span class="text-rd-green">themes</span> list.
+      <span [style.color]="t.accentColor">themes</span> list.
     </p>
-    <p class="text-white">
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
       Here you can find and customize all of your themes.
     </p>
   </div>
@@ -16,7 +21,9 @@
           <div class="my-2">
             <button
               (click)="add()"
-              class="my-2 float-right btn border-0 btn-rd-green"
+              class="my-2 float-right btn border-0"
+              [style.backgroundColor]="t.accentColor"
+              [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
             >
               New theme
             </button>
@@ -27,6 +34,7 @@
                 <th scope="col">Logo</th>
                 <th scope="col">Primary color</th>
                 <th scope="col">Accent color</th>
+                <th scope="col">Text color</th>
               </tr>
             </thead>
             <tbody>
@@ -57,14 +65,32 @@
                   ></div>
                 </td>
                 <td>
+                  <div
+                    class="color"
+                    [style.backgroundColor]="
+                      theme.textWhite ? 'white' : 'black'
+                    "
+                  ></div>
+                </td>
+                <td>
                   <div class="float-right">
                     <button
+                      (click)="setActive(theme)"
+                      [style.backgroundColor]="t.accentColor"
+                      [ngStyle]="
+                        t.textWhite ? { color: 'white' } : { color: 'black' }
+                      "
                       class="btn btn-theme px-2 mx-2"
                       *ngIf="!theme.active"
                     >
                       Activate
                     </button>
                     <button
+                      (click)="setActive(theme)"
+                      [style.backgroundColor]="t.accentColor"
+                      [ngStyle]="
+                        t.textWhite ? { color: 'white' } : { color: 'black' }
+                      "
                       class="btn btn-theme px-2 mx-2"
                       *ngIf="theme.active"
                       disabled
@@ -72,12 +98,20 @@
                       Activate
                     </button>
                     <button
+                      [style.backgroundColor]="t.accentColor"
+                      [ngStyle]="
+                        t.textWhite ? { color: 'white' } : { color: 'black' }
+                      "
                       (click)="edit(theme.id)"
                       class="btn btn-theme px-2 mx-2"
                     >
                       Edit
                     </button>
                     <button
+                      [style.backgroundColor]="t.accentColor"
+                      [ngStyle]="
+                        t.textWhite ? { color: 'white' } : { color: 'black' }
+                      "
                       (click)="delete(theme.id)"
                       class="btn btn-theme px-2 mx-2"
                     >

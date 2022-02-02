@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartData, Color } from 'chart.js';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Theme } from 'src/app/settings/themes/theme';
+interface AppState {
+  theme: Theme;
+}
+
 export interface Tile {
   color: string;
   cols: number;
@@ -12,6 +19,7 @@ export interface Tile {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  theme!: Observable<Theme>;
   public doughnutChartColors: Color[] = [];
   public doughnutChartLabels: string[] = [
     'Cars',
@@ -122,7 +130,9 @@ export class DashboardComponent implements OnInit {
     { text: 'Two', cols: 2, rows: 2, color: 'lightgreen' },
     { text: 'Three', cols: 2, rows: 1, color: 'lightpink' },
   ];
-  constructor() {}
+  constructor(private store: Store<AppState>) {
+    this.theme = store.select('theme');
+  }
 
   ngOnInit(): void {}
 }

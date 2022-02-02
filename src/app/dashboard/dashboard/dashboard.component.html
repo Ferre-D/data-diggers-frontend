@@ -1,9 +1,9 @@
-<div class="w-100 bg-light">
-  <div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+<div class="w-100 bg-light" *ngIf="theme | async as t">
+  <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
     <h3 class="text-white mt-2">Dashboard</h3>
     <p class="text-white">
-      Welcome Ferre to the
-      <span class="text-rd-green">Prins boudewijnlaan</span> dashboard.
+      Welcome to the
+      <span [style.color]="t.accentColor">Prins boudewijnlaan</span> dashboard.
     </p>
     <p class="text-white">
       Here you can find a bunch of useful and intersting information about the
@@ -14,9 +14,11 @@
     <div class="row">
       <div class="col-sm-12 col-md-4">
         <div class="kpi-card mx-auto">
-          <div class="icon-circle">
-            <i class="fas fa-car kpi-icon"></i>
-          </div>
+          <div
+            class="icon-circle"
+            [style.backgroundColor]="t.accentColor"
+          ></div>
+          <i class="fas fa-car kpi-icon" [style.color]="t.accentColor"></i>
           <div><p class="kpi-text">622</p></div>
           <div><p class="kpi-label">Cars passed</p></div>
           <div class="kpi-green">
@@ -26,10 +28,11 @@
       </div>
       <div class="col-sm-12 col-md-4">
         <div class="kpi-card mx-auto">
-          <div class="icon-circle">
-            <i class="fas fa-truck kpi-icon"></i>
-            <div><p class="kpi-change"></p></div>
-          </div>
+          <div
+            class="icon-circle"
+            [style.backgroundColor]="t.accentColor"
+          ></div>
+          <i class="fas fa-truck kpi-icon" [style.color]="t.accentColor"></i>
           <div><p class="kpi-text">314</p></div>
           <div><p class="kpi-label">Trucks passed</p></div>
           <div class="kpi-red">
@@ -39,9 +42,11 @@
       </div>
       <div class="col-sm-12 col-md-4">
         <div class="kpi-card mx-auto">
-          <div class="icon-circle">
-            <i class="fas fa-bicycle kpi-icon"></i>
-          </div>
+          <div
+            class="icon-circle"
+            [style.backgroundColor]="t.accentColor"
+          ></div>
+          <i class="fas fa-bicycle kpi-icon" [style.color]="t.accentColor"></i>
           <div><p class="kpi-text">116</p></div>
           <div><p class="kpi-label">Bikes passed</p></div>
           <div class="kpi-green">

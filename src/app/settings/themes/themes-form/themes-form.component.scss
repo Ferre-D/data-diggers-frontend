@@ -3,14 +3,15 @@
   margin: 2rem 0;
 }
 .style-form {
-  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
-  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
-  border-radius: 5px;
+  // -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  // box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  // border-radius: 5px;
 }
 .reference {
   width: 50%;
   margin: 2rem auto;
-  height: 100px;
-  border-radius: 5px;
-  color: white;
+  div {
+    height: 100px;
+    border-radius: 5px;
+  }
 }

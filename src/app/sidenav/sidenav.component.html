@@ -1,4 +1,9 @@
-<mat-sidenav-container mode="over" class="example-container" *ngIf="theme">
+<mat-sidenav-container
+  *ngIf="theme | async as t"
+  mode="over"
+  class="example-container"
+>
+  <style></style>
   <mat-sidenav
     *ngIf="!disabledLeft"
     class="left-sidenav"
@@ -8,18 +13,23 @@
   >
     <div class="d-flex flex-column wrapper h-100">
       <div class="logo-div mt-3">
-        <img src="{{ theme.logoUrl }}" alt="logo" />
+        <img src="{{ t.logoUrl }}" alt="logo" />
       </div>
       <div
         class="d-flex flex-column justify-content-around mt-5 nav-items align-items-center"
       >
         <a
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="/dashboard"
+          #dashboard
           routerLinkActive="active"
+          routerLink="/dashboard"
           class="d-flex nav-item my-4 align-items-center justify-content-start"
         >
-          <div class="pr-4"><i class="fas fa-th-large fa-2x nav-icon"></i></div>
+          <div class="pr-4">
+            <i
+              class="fas fa-th-large fa-2x nav-icon"
+              [ngStyle]="dashboardActive ? { color: t.accentColor } : {}"
+            ></i>
+          </div>
           <div class="nav-text">Dashboard</div>
         </a>
         <div
@@ -35,17 +45,32 @@
           <div class="nav-text">Reserve</div>
         </div>
         <a
+          #settings
           *ngIf="this.authService.isAdmin()"
-          routerLink="/settings"
           routerLinkActive="active"
+          routerLink="/settings"
           class="d-flex nav-item my-4 align-items-center justify-content-start"
         >
-          <div class="pr-4"><i class="fas fa-cog fa-2x nav-icon"></i></div>
+          <div class="pr-4">
+            <i
+              class="fas fa-cog fa-2x nav-icon"
+              [ngStyle]="settingsActive ? { color: t.accentColor } : {}"
+            ></i>
+          </div>
           <div class="nav-text">Settings</div>
         </a>
       </div>
-      <div class="logout" (click)="logOut()">
-        <div class="logout-text">Sign out</div>
+      <div
+        class="logout"
+        [style.borderTop]="'6px solid ' + t.accentColor"
+        (click)="logOut()"
+      >
+        <div
+          class="logout-text"
+          [style.borderRight]="'4px solid ' + t.accentColor"
+        >
+          Sign out
+        </div>
         <i class="fas fa-sign-out-alt fa-2x logout-icon"></i>
       </div>
     </div>
@@ -58,17 +83,30 @@
     [(opened)]="openedNav2"
     position="end"
   >
-    <div class="w-100 mt-3 px-2"><h3 class="filter-title">Filter</h3></div>
+    <div class="w-100 mt-3 px-2">
+      <h3
+        [style.borderBottom]="'5px solid ' + t.accentColor"
+        class="filter-title"
+      >
+        Filter
+      </h3>
+    </div>
     <div class="d-flex filter-days">
-      <p class="filter-active">All time</p>
-      <p>90 Days</p>
-      <p>30 Days</p>
+      <div class="filter-active" [style.backgroundColor]="t.accentColor">
+        <p>All time</p>
+      </div>
+      <div [style.backgroundColor]="t.accentColor"><p>90 Days</p></div>
+      <div [style.backgroundColor]="t.accentColor"><p>30 Days</p></div>
     </div>
     <div class="demo-inline-calendar-card">
       <mat-calendar [(selected)]="selected"></mat-calendar>
     </div>
     <div class="w-100">
-      <button class="btn btn-rd-green float-left" (click)="clearDate()">
+      <button
+        class="btn float-left text-white"
+        [style.backgroundColor]="t.accentColor"
+        (click)="clearDate()"
+      >
         clear date
       </button>
     </div>

@@ -32,24 +32,26 @@ mat-sidenav {
   justify-content: space-between;
   margin: 3rem 2rem;
   align-items: center;
+  div {
+    border-radius: 50px;
+    overflow: hidden;
+    opacity: 0.5;
+  }
+  .filter-active {
+    opacity: 1 !important;
+  }
   p {
     width: 57px;
     height: 27px;
     margin: 0;
-    border-radius: 50px;
     font-size: 11px;
     padding: 5px 2px;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    background-color: rgba($color: $rd-green, $alpha: 0.5);
-  }
-  .filter-active {
-    background-color: $rd-green !important;
   }
 }
 .filter-title {
-  border-bottom: 5px solid $rd-green;
   font-size: 36px;
   font-weight: bold;
   text-align: start;
@@ -59,9 +61,6 @@ mat-sidenav {
   width: 200px;
 }
 .active {
-  .nav-icon {
-    color: $rd-green !important;
-  }
   .nav-text {
     color: black !important;
   }
@@ -78,7 +77,6 @@ a:hover {
   font-size: 24px;
 }
 .logout-text {
-  border-right: 4px solid $rd-green;
   font-weight: bold;
   color: black;
   font-size: 24px;
@@ -87,7 +85,6 @@ a:hover {
 }
 .logout {
   cursor: pointer;
-  border-top: 6px solid $rd-green;
   width: 100%;
   position: absolute;
   padding-top: 8px;

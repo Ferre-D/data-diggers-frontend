@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -13,8 +14,11 @@ import { Location } from '@angular/common';
 import { AuthService } from '../security/auth.service';
 import { ThemesService } from '../settings/themes/themes.service';
 import { Theme } from '../settings/themes/theme';
-import { Subscription } from 'rxjs';
-
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+interface AppState {
+  theme: Theme;
+}
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -23,11 +27,15 @@ import { Subscription } from 'rxjs';
 export class SidenavComponent implements AfterViewInit, OnInit {
   themes$: Subscription = new Subscription();
   themes: Theme[] = [];
-  theme!: Theme;
+  theme!: Observable<Theme>;
   @ViewChild('sidenavStart')
   sidenavStart!: MatSidenav;
   @ViewChild('sidenavEnd')
   sidenavEnd!: MatSidenav;
+
+  settingsActive: boolean = false;
+  dashboardActive: boolean = false;
+
   opened = true;
   openedNav2 = true;
   selected!: Date | null;
@@ -36,12 +44,13 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   disabledRight: boolean = false;
   disabledLeft: boolean = false;
   constructor(
-    private themesService: ThemesService,
+    private store: Store<AppState>,
     private observer: BreakpointObserver,
     private location: Location,
     private router: Router,
     public authService: AuthService
   ) {
+    this.theme = store.select('theme');
     if (this.location.path() == '') this.router.navigateByUrl('/dashboard');
     this.router.events.subscribe((val) => {
       this.path = this.location.path();
@@ -51,19 +60,20 @@ export class SidenavComponent implements AfterViewInit, OnInit {
         this.path.includes('signup');
       this.disabledLeft =
         this.path.includes('login') || this.path.includes('signup');
+      this.reset();
+      this.dashboardActive = this.path.includes('dashboard');
+      this.settingsActive = this.path.includes('settings');
     });
+
+    console.log(this.dashboardActive);
   }
-  ngOnInit(): void {
-    this.themes$ = this.themesService.getThemes().subscribe((result) => {
-      this.themes = result;
-      this.themes = this.themes.filter((t) => {
-        return (t.active = true);
-      });
-      this.theme = this.themes[0];
-    });
-  }
+  ngOnInit(): void {}
   clearDate() {
     this.selected = null;
+  }
+  reset() {
+    this.dashboardActive = false;
+    this.settingsActive = false;
   }
   logOut() {
     this.authService.deleteToken();

@@ -9,10 +9,7 @@
   background: #e8e7ec;
   min-height: 100vh;
 }
-.kpi-icon {
-  color: $rd-green;
-  font-size: 2.3rem;
-}
+
 .kpi-card {
   width: 70%;
   border-radius: 5px;
@@ -30,16 +27,28 @@
     line-height: 2.1rem;
   }
 }
+.kpi-icon {
+  position: absolute;
+  opacity: 1 !important;
+  font-size: 2.3rem;
+  top: 30px;
+}
 .icon-circle {
+  position: absolute;
+  background-color: saddlebrown;
+
+  top: 15px;
+
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background-color: rgba($color: $rd-green, $alpha: 0.35);
+  opacity: 0.35;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .kpi-text {
+  padding-top: 4.5rem !important;
   font-weight: 600;
   font-size: 36px;
   padding-top: 5px;

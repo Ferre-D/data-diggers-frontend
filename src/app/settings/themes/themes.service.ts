@@ -15,9 +15,7 @@ export class ThemesService {
   constructor(private httpClient: HttpClient) {}
 
   getThemes(): Observable<Theme[]> {
-    return timer(1, 2200).pipe(
-      switchMap(() => this.httpClient.get<Theme[]>(this.rootUrl))
-    );
+    return this.httpClient.get<Theme[]>(this.rootUrl);
   }
 
   getThemeById(id: number): Observable<Theme> {
@@ -41,6 +39,28 @@ export class ThemesService {
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
     return this.httpClient.put<Theme>(this.rootUrl + id, theme, {
+      headers: headers,
+    });
+  }
+  deactivate(currentActiveTheme: Theme | undefined): Observable<Theme> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    currentActiveTheme!.active = false;
+
+    return this.httpClient.put<Theme>(
+      this.rootUrl + currentActiveTheme!.id,
+      currentActiveTheme,
+      {
+        headers: headers,
+      }
+    );
+  }
+  activate(theme: Theme) {
+    theme.active = true;
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.httpClient.put<Theme>(this.rootUrl + theme.id, theme, {
       headers: headers,
     });
   }

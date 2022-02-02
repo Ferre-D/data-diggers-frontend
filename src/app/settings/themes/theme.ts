@@ -3,5 +3,6 @@ export interface Theme {
   primaryColor: string;
   accentColor: string;
   logoUrl: string;
+  textWhite: boolean;
   active: boolean;
 }

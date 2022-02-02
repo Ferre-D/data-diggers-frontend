@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/security/user';
+import { Theme } from '../../themes/theme';
 import { UserService } from '../user.service';
 
+interface AppState {
+  theme: Theme;
+}
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -11,9 +16,16 @@ import { UserService } from '../user.service';
 })
 export class UsersListComponent implements OnInit, OnDestroy {
   users: User[] = [];
+  theme!: Observable<Theme>;
   users$: Subscription = new Subscription();
   deleteUser$: Subscription = new Subscription();
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {
+    this.theme = store.select('theme');
+  }
   add() {
     this.router.navigateByUrl('/settings/users/newuser');
   }

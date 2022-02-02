@@ -1,14 +1,19 @@
-<div class="w-100 bg-rd-dark-blue welcome p-4 pt-4">
+<div
+  class="w-100 welcome p-4 pt-4"
+  [style.backgroundColor]="t.primaryColor"
+  *ngIf="theme | async as t"
+>
   <h3 class="text-white mt-2">Admin</h3>
   <p class="text-white">
     Welcome to the
-    <span class="text-rd-green">admin</span> page.
+    <span [style.color]="t.accentColor">admin</span> page.
   </p>
   <p class="text-white">
     Here you can find and manage a bunch of useful and interesting information.
   </p>
 </div>
-<div class="container">
+
+<div class="container" *ngIf="theme | async as t">
   <div class="row">
     <div class="col-sm-12 col-lg-6">
       <div class="card mx-auto">
@@ -22,6 +27,7 @@
           <h3 class="text-center">{{ countThemes }}</h3>
           <p class="alt-text">Themes created</p>
           <a
+            [style.color]="t.accentColor"
             class="float-right details-text pr-4"
             routerLink="/settings/themes"
           >
@@ -41,7 +47,12 @@
         <div class="w-50 text-center">
           <h3 class="text-center">{{ countUsers }}</h3>
           <p class="alt-text">Users created</p>
-          <a routerLink="/settings/users" class="float-right details-text pr-4">
+
+          <a
+            routerLink="/settings/users"
+            [style.color]="t.accentColor"
+            class="float-right details-text pr-4"
+          >
             Details <i class="fas fa-long-arrow-alt-right"></i>
           </a>
         </div>

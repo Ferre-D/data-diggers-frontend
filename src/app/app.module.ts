@@ -12,7 +12,8 @@ import { SettingsModule } from './settings/settings.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { MaterialModule } from './material.module';
+import { StoreModule } from '@ngrx/store';
+import { themeReducer } from './reducers/theme.reducer';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -26,6 +27,7 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    StoreModule.forRoot({ theme: themeReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent],

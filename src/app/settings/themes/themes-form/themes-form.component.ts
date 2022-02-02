@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Theme } from '../theme';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ThemesService } from '../themes.service';
 import {
   AngularFireStorage,
@@ -10,7 +10,12 @@ import {
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import * as ThemeActions from '../../../actions/theme.actions';
 
+interface AppState {
+  theme: Theme;
+}
 @Component({
   selector: 'app-themes-form',
   templateUrl: './themes-form.component.html',
@@ -20,6 +25,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
   isAdd: boolean = false;
   isEdit: boolean = false;
   themeId: number = 0;
+  active: boolean = false;
 
   isSubmitted: boolean = false;
   nameChangeMessage: string = '';
@@ -36,6 +42,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
     accentColor: new FormControl('', Validators.required),
     logoUrl: new FormControl(''),
     active: new FormControl('false'),
+    textWhite: new FormControl(false),
   });
   //firebase
   ref: AngularFireStorageReference | undefined;
@@ -45,6 +52,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
   uploadProgress: number | undefined;
 
   constructor(
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
@@ -68,7 +76,9 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
           accentColor: result.accentColor,
           logoUrl: result.logoUrl,
           active: result.active,
+          textWhite: result.textWhite,
         });
+        this.active = result.active;
       });
     }
   }
@@ -134,6 +144,9 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
         );
     }
     if (this.isEdit) {
+      if (this.active) {
+        this.store.dispatch(new ThemeActions.EditTheme(this.themeForm.value));
+      }
       this.putTheme$ = this.themesService
         .putTheme(this.themeId, this.themeForm.value)
         .subscribe(
