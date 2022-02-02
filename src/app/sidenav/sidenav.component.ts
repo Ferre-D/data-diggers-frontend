@@ -79,6 +79,9 @@ export class SidenavComponent implements AfterViewInit, OnInit {
     this.authService.deleteToken();
     this.router.navigate(['login']);
   }
+  toggle() {
+    this.sidenavStart.toggle();
+  }
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {

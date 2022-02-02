@@ -114,3 +114,13 @@ a:hover {
     font-size: 3rem;
   }
 }
+.toggle {
+  position: absolute;
+  color: white;
+  right: 1rem;
+  * {
+    padding: 0.5rem;
+    margin: 0;
+    font-size: 25px;
+  }
+}

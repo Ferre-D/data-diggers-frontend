@@ -3,7 +3,6 @@
   mode="over"
   class="example-container"
 >
-  <style></style>
   <mat-sidenav
     *ngIf="!disabledLeft"
     class="left-sidenav"
@@ -112,6 +111,9 @@
     </div>
   </mat-sidenav>
   <div class="mat-content">
+    <div class="toggle d-xs-block d-sm-block d-md-none" (click)="toggle()">
+      <i class="fas fa-bars"></i>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </mat-sidenav-container>
