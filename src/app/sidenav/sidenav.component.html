@@ -110,12 +110,12 @@
       </button>
     </div>
   </mat-sidenav>
-  <div class="mat-content">
+  <mat-sidenav-content class="mat-content m-0 p-0">
     <div class="toggle d-xs-block d-sm-block d-md-none" (click)="toggle()">
       <i class="fas fa-bars"></i>
     </div>
     <router-outlet></router-outlet>
-  </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 <div class="loading" *ngIf="!theme">
   <div>
