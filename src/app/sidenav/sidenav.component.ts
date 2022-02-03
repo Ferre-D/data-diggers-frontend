@@ -44,6 +44,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   path: string = '';
   disabledRight: boolean = false;
   disabledLeft: boolean = false;
+  hideBars: boolean = false;
   constructor(
     private store: Store<AppState>,
     private observer: BreakpointObserver,
@@ -60,6 +61,8 @@ export class SidenavComponent implements AfterViewInit, OnInit {
         this.path.includes('login') ||
         this.path.includes('signup');
       this.disabledLeft =
+        this.path.includes('login') || this.path.includes('signup');
+      this.hideBars =
         this.path.includes('login') || this.path.includes('signup');
       this.reset();
       this.dashboardActive = this.path.includes('dashboard');
