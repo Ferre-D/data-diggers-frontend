@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { Activity } from '../../activity';
+import { ActivityService } from '../../activity.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   isAdd: boolean = false;
   isEdit: boolean = false;
   userId: number = 0;
+  activity!: Activity;
 
   isAdmin: boolean = false;
   isSubmitted: boolean = false;
@@ -21,6 +24,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   user$: Subscription = new Subscription();
   postUser$: Subscription = new Subscription();
   putUser$: Subscription = new Subscription();
+
+  $postActivity: Subscription = new Subscription();
 
   userForm = new FormGroup({
     id: new FormControl(0),
@@ -35,7 +40,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private activityService: ActivityService
   ) {
     this.isAdd = this.router.url === '/settings/users/newuser';
 
