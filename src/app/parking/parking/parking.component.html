@@ -1,0 +1,84 @@
+<div class="w-100 bg-light" *ngIf="theme | async as t">
+  <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
+    <h3 class="text-white mt-2">Parking</h3>
+    <p class="text-white">
+      Welcome to the
+      <span [style.color]="t.accentColor">parking</span> dashboard.
+    </p>
+    <p class="text-white">
+      Here you can find a bunch of useful and intersting information about the
+      parking in front of Real Dolmen, Kontich.
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="kpi-card mx-auto">
+          <div class="live">
+            <ng-lottie
+              [options]="live"
+              (animationCreated)="animationCreated($event)"
+            ></ng-lottie>
+          </div>
+          <div
+            class="icon-circle"
+            [style.backgroundColor]="t.accentColor"
+          ></div>
+          <i class="fas fa-parking kpi-icon" [style.color]="t.accentColor"></i>
+          <div><p class="kpi-text">3/12</p></div>
+          <div><p class="kpi-label">Cars Parked</p></div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="kpi-card mx-auto">
+          <div
+            class="icon-circle"
+            [style.backgroundColor]="t.accentColor"
+          ></div>
+          <i class="fas fa-car kpi-icon" [style.color]="t.accentColor"></i>
+          <div><p class="kpi-text">214</p></div>
+          <div><p class="kpi-label">Total Cars Parked</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="graph mx-auto">
+          <canvas
+            baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="barChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-sm-12">
+        <div class="d-flex justify-content-center info">
+          <div class="lottie d-none d-md-block">
+            <ng-lottie
+              [options]="calendar"
+              (animationCreated)="animationCreated($event)"
+            ></ng-lottie>
+          </div>
+          <div class="my-auto">
+            <h3 class="infoTitle">RESERVED PARKING SPOTS</h3>
+            <p class="infoText my-4 text-right">
+              Your clients have the ability to reserve parking spots,<br />
+              you can view them here.
+            </p>
+            <button
+              [style.backgroundColor]="t.accentColor"
+              [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+              class="btn btn-user float-right"
+            >
+              Visit reservations
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
