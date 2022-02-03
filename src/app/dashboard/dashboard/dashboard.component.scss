@@ -17,8 +17,8 @@
   background: #fff;
   height: 190px;
   transform: translateY(-70px);
-  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
-  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +36,6 @@
 }
 .icon-circle {
   position: absolute;
-  background-color: saddlebrown;
 
   top: 15px;
 
@@ -63,8 +62,8 @@
   margin-right: auto;
   text-align: center;
 
-  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
-  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.14);
   height: 100%;
   border-radius: 5px;
   background: #fff;
@@ -85,8 +84,8 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: space-around;
-  -webkit-box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
-  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.14);
   height: 220px;
   border-radius: 5px;
   background: #fff;

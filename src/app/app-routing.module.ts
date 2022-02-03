@@ -11,11 +11,18 @@ import { ThemesListComponent } from './settings/themes/themes-list/themes-list.c
 import { ThemesFormComponent } from './settings/themes/themes-form/themes-form.component';
 import { UsersFormComponent } from './settings/users/users-form/users-form.component';
 import { UsersListComponent } from './settings/users/users-list/users-list.component';
+import { ParkingComponent } from './parking/parking/parking.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+  },
+  {
+    path: 'parking',
+    component: ParkingComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
   },

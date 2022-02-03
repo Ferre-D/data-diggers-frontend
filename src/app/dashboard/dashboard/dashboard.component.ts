@@ -113,14 +113,20 @@ export class DashboardComponent implements OnInit {
     datasets: [
       {
         data: [75, 83, 78, 84, 73, 58, 66],
+        borderColor: '#6A99DE',
+        pointBorderColor: '#6A99DE',
+        pointBackgroundColor: '#fff',
         label: 'Cars',
-        pointRadius: 0,
+        pointRadius: 2,
       },
       {
         data: [23, 26, 22, 28, 32, 44, 36],
+        borderColor: '#FFA27A',
+        pointBorderColor: '#FFA27A',
+        pointBackgroundColor: '#fff',
         label: 'Bikes',
         fill: false,
-        pointRadius: 0,
+        pointRadius: 2,
       },
     ],
   };

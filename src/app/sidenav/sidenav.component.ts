@@ -35,6 +35,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
 
   settingsActive: boolean = false;
   dashboardActive: boolean = false;
+  parkingActive: boolean = false;
 
   opened = true;
   openedNav2 = true;
@@ -63,6 +64,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
       this.reset();
       this.dashboardActive = this.path.includes('dashboard');
       this.settingsActive = this.path.includes('settings');
+      this.parkingActive = this.path.includes('parking');
     });
 
     console.log(this.dashboardActive);

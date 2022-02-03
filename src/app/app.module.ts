@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { StoreModule } from '@ngrx/store';
 import { themeReducer } from './reducers/theme.reducer';
+import { ParkingModule } from './parking/parking.module';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -21,6 +22,7 @@ import { themeReducer } from './reducers/theme.reducer';
     ToastrModule.forRoot(),
     BrowserModule,
     SharedModule,
+    ParkingModule,
     DashboardModule,
     SettingsModule,
     SecurityModule,
