@@ -21,7 +21,7 @@
           <div class="my-2">
             <button
               (click)="add()"
-              class="my-2 float-right btn border-0"
+              class="my-2 float-right mr-3 btn border-0"
               [style.backgroundColor]="t.accentColor"
               [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
             >
@@ -32,9 +32,10 @@
             <thead>
               <tr>
                 <th scope="col">Logo</th>
-                <th scope="col">Primary color</th>
-                <th scope="col">Accent color</th>
-                <th scope="col">Text color</th>
+                <th scope="col">Primary</th>
+                <th scope="col">Accent</th>
+                <th scope="col">Text</th>
+                <th scope="col" class="d-md-none">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -74,49 +75,55 @@
                 </td>
                 <td>
                   <div class="float-right">
-                    <button
-                      (click)="setActive(theme)"
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      class="btn btn-theme px-2 mx-2"
-                      *ngIf="!theme.active"
-                    >
-                      Activate
-                    </button>
-                    <button
-                      (click)="setActive(theme)"
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      class="btn btn-theme px-2 mx-2"
-                      *ngIf="theme.active"
-                      disabled
-                    >
-                      Activate
-                    </button>
-                    <button
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      (click)="edit(theme.id)"
-                      class="btn btn-theme px-2 mx-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      (click)="delete(theme.id)"
-                      class="btn btn-theme px-2 mx-2"
-                    >
-                      Delete
-                    </button>
+                    <div class="d-md-none">
+                      <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="menu"
+                        aria-label="Example icon-button with a menu"
+                      >
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button
+                          (click)="setActive(theme)"
+                          mat-menu-item
+                          *ngIf="!theme.active"
+                        >
+                          <mat-icon>visibility</mat-icon>
+                          <span>Activate</span>
+                        </button>
+                        <button *ngIf="theme.active" disabled mat-menu-item>
+                          <mat-icon>visibility</mat-icon>
+                          <span>Activate</span>
+                        </button>
+                        <button (click)="edit(theme.id)" mat-menu-item>
+                          <mat-icon>edit</mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button (click)="delete(theme.id)" mat-menu-item>
+                          <mat-icon>delete</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                    <div class="d-none d-md-block">
+                      <a class="px-1 action" *ngIf="!theme.active">
+                        Activate
+                      </a>
+                      <a
+                        *ngIf="theme.active"
+                        class="px-1 disabled action"
+                        disabled
+                      >
+                        Activate
+                      </a>
+                      |
+                      <a (click)="edit(theme.id)" class="px-1 action"> Edit </a>
+                      |
+                      <a (click)="delete(theme.id)" class="px-1 action">
+                        Delete
+                      </a>
+                    </div>
                   </div>
                 </td>
               </tr>

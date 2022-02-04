@@ -1,11 +1,16 @@
 <div class="w-100 bg-light" *ngIf="theme | async as t">
   <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
-    <h3 class="text-white mt-2">Dashboard</h3>
-    <p class="text-white">
+    <h3
+      [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+      class="mt-2"
+    >
+      Dashboard
+    </h3>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
       Welcome to the
       <span [style.color]="t.accentColor">Prins boudewijnlaan</span> dashboard.
     </p>
-    <p class="text-white">
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
       Here you can find a bunch of useful and intersting information about the
       road.
     </p>

@@ -100,17 +100,28 @@
     </div>
     <div class="d-flex filter-days">
       <div class="filter-active" [style.backgroundColor]="t.accentColor">
-        <p>All time</p>
+        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+          All time
+        </p>
       </div>
-      <div [style.backgroundColor]="t.accentColor"><p>90 Days</p></div>
-      <div [style.backgroundColor]="t.accentColor"><p>30 Days</p></div>
+      <div [style.backgroundColor]="t.accentColor">
+        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+          90 Days
+        </p>
+      </div>
+      <div [style.backgroundColor]="t.accentColor">
+        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+          30 Days
+        </p>
+      </div>
     </div>
     <div class="demo-inline-calendar-card">
       <mat-calendar [(selected)]="selected"></mat-calendar>
     </div>
     <div class="w-100">
       <button
-        class="btn float-left text-white"
+        [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+        class="btn float-left"
         [style.backgroundColor]="t.accentColor"
         (click)="clearDate()"
       >

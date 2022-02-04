@@ -54,10 +54,4 @@ export class AuthService {
   register(user: User): Observable<User> {
     return this.httpClient.post<User>(this.rootUrl, user);
   }
-  count(): Observable<count> {
-    let headers = new HttpHeaders();
-    let bearer = 'bearer ' + this.getToken();
-    headers = headers.set('Authorization', bearer);
-    return this.httpClient.get<count>(this.rootUrl + 'count');
-  }
 }

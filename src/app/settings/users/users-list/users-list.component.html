@@ -32,6 +32,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Admin</th>
+                <th scope="col" class="d-md-none">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -52,26 +53,32 @@
                 </td>
                 <td>
                   <div class="float-right">
-                    <button
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      (click)="edit(user.id)"
-                      class="btn btn-user px-2 mx-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      [style.backgroundColor]="t.accentColor"
-                      [ngStyle]="
-                        t.textWhite ? { color: 'white' } : { color: 'black' }
-                      "
-                      (click)="delete(user.id)"
-                      class="btn px-2 mx-2"
-                    >
-                      Delete
-                    </button>
+                    <div class="d-md-none">
+                      <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="menu"
+                        aria-label="Example icon-button with a menu"
+                      >
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button (click)="edit(user.id)" mat-menu-item>
+                          <mat-icon>edit</mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button (click)="delete(user.id)" mat-menu-item>
+                          <mat-icon>delete</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                    <div class="d-none d-md-block">
+                      <a (click)="edit(user.id)" class="px-1 action"> Edit </a>
+                      |
+                      <a (click)="delete(user.id)" class="px-1 action">
+                        Delete
+                      </a>
+                    </div>
                   </div>
                 </td>
               </tr>

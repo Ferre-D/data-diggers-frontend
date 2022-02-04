@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/security/user';
+import { count } from '../count';
 
 @Injectable({
   providedIn: 'root',
@@ -41,5 +42,8 @@ export class UserService {
 
   deleteUser(id: number): Observable<User> {
     return this.httpClient.delete<User>(this.rootUrl + id);
+  }
+  count(): Observable<count> {
+    return this.httpClient.get<count>(this.rootUrl + 'count');
   }
 }

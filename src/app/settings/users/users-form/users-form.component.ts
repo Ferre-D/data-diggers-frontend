@@ -16,7 +16,13 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   isAdd: boolean = false;
   isEdit: boolean = false;
   userId: number = 0;
-  activity!: Activity;
+  activity: Activity = {
+    id: 0,
+    action: '',
+    created_at: new Date(),
+    description: '',
+    usersId: 2,
+  };
 
   isAdmin: boolean = false;
   isSubmitted: boolean = false;
