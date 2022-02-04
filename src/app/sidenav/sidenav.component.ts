@@ -88,15 +88,24 @@ export class SidenavComponent implements AfterViewInit, OnInit {
     this.sidenavStart.toggle();
   }
   ngAfterViewInit() {
+    this.observer.observe(['(max-width: 1270px']).subscribe((res) => {
+      if (res.matches) {
+        if (this.disabledRight == false) {
+          this.sidenavEnd.mode = 'over';
+          this.sidenavEnd.close();
+        }
+      } else {
+        if (this.disabledRight == false) {
+          this.sidenavEnd.mode = 'side';
+          this.sidenavEnd.open();
+        }
+      }
+    });
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {
         if (this.disabledLeft == false) {
           this.sidenavStart.mode = 'over';
           this.sidenavStart.close();
-        }
-        if (this.disabledRight == false) {
-          this.sidenavEnd.mode = 'over';
-          this.sidenavEnd.close();
         }
         this.small = true;
       } else {
@@ -104,10 +113,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
           this.sidenavStart.mode = 'side';
           this.sidenavStart.open();
         }
-        if (this.disabledRight == false) {
-          this.sidenavEnd.mode = 'side';
-          this.sidenavEnd.open();
-        }
+
         this.small = false;
       }
     });

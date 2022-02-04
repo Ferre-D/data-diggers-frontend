@@ -49,15 +49,22 @@
                 </td>
                 <td>
                   <div
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="{{ theme.primaryColor }}"
+                    mat-raised-button
+                    #tooltip="matTooltip"
+                    matTooltip="{{ theme.primaryColor }}"
+                    [matTooltipPosition]="'above'"
+                    matTooltipHideDelay="3000"
                     class="color"
                     [style.backgroundColor]="theme.primaryColor"
                   ></div>
                 </td>
                 <td>
                   <div
+                    mat-raised-button
+                    #tooltip="matTooltip"
+                    matTooltip="{{ theme.accentColor }}"
+                    [matTooltipPosition]="'above'"
+                    matTooltipHideDelay="3000"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="{{ theme.accentColor }}"
@@ -67,6 +74,11 @@
                 </td>
                 <td>
                   <div
+                    mat-raised-button
+                    #tooltip="matTooltip"
+                    matTooltip="{{ theme.textWhite ? 'White' : 'Black' }}"
+                    [matTooltipPosition]="'above'"
+                    matTooltipHideDelay="3000"
                     class="color"
                     [style.backgroundColor]="
                       theme.textWhite ? 'white' : 'black'
@@ -108,6 +120,10 @@
                     </div>
                     <div class="d-none d-md-block">
                       <a
+                        #tooltip="matTooltip"
+                        matTooltip="Activate the theme"
+                        [matTooltipPosition]="'above'"
+                        matTooltipHideDelay="3000"
                         class="px-1 action"
                         (click)="setActive(theme)"
                         *ngIf="!theme.active"
