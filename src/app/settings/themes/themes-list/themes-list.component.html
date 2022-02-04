@@ -107,7 +107,11 @@
                       </mat-menu>
                     </div>
                     <div class="d-none d-md-block">
-                      <a class="px-1 action" *ngIf="!theme.active">
+                      <a
+                        class="px-1 action"
+                        (click)="setActive(theme)"
+                        *ngIf="!theme.active"
+                      >
                         Activate
                       </a>
                       <a

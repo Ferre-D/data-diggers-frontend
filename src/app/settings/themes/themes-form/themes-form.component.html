@@ -1,4 +1,4 @@
-<div class="w-50 mx-auto pt-5">
+<div class="w-50 mx-auto pt-5" *ngIf="theme | async as t">
   <form (ngSubmit)="onSubmit()" class="p-4 style-form" [formGroup]="themeForm">
     <div class="">
       <label class="form-label" for="logo">Logo</label>
@@ -6,7 +6,6 @@
         type="file"
         id="logo"
         class="form-control-file"
-        autocomplete="off"
         (change)="onImageSelected($event)"
         accept=".png, .jpg"
       />
@@ -45,7 +44,7 @@
     </div>
     <button
       type="submit"
-      class="btn btn-primary"
+      class="btn"
       *ngIf="isAdd"
       [disabled]="!themeForm.valid || isSubmitted"
     >
@@ -53,7 +52,9 @@
     </button>
     <button
       type="submit"
-      class="btn btn-primary"
+      [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+      [style.backgroundColor]="t.accentColor"
+      class="btn"
       *ngIf="isEdit"
       [disabled]="!themeForm.valid || isSubmitted"
     >

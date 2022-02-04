@@ -26,6 +26,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
   isEdit: boolean = false;
   themeId: number = 0;
   active: boolean = false;
+  theme!: Observable<Theme>;
 
   isSubmitted: boolean = false;
   nameChangeMessage: string = '';
@@ -59,6 +60,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
     private themesService: ThemesService,
     private angularFireStorage: AngularFireStorage
   ) {
+    this.theme = store.select('theme');
     this.isAdd = this.router.url === '/settings/themes/newtheme';
 
     this.isEdit = !this.isAdd;
