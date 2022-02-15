@@ -23,8 +23,6 @@ export class DashboardService {
     );
   }
   getDashboardDataDate(date: Date): Observable<passing_cars> {
-    console.log(formatDate(date, 'YYYY-MM-dd', 'en-US'));
-
     return this.httpClient.get<passing_cars>(
       this.rootUrl + 'countdate?date=' + formatDate(date, 'YYYY-MM-dd', 'en-US')
     );
