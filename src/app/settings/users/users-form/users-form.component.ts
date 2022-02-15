@@ -151,9 +151,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
                   ' has been edited',
                 usersId: Number.parseInt(localStorage.getItem('id') || '1'),
               })
-              .subscribe((result) => {
-                console.log(result);
-              });
+              .subscribe((result) => {});
             this.router.navigateByUrl('/settings/users');
           },
           (error) => {

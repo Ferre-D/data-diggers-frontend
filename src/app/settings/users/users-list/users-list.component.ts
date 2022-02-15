@@ -57,9 +57,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
               'The user ' + firstName + ' ' + lastName + ' has been removed',
             usersId: Number.parseInt(localStorage.getItem('id') || '1'),
           })
-          .subscribe((result) => {
-            console.log(result);
-          });
+          .subscribe((result) => {});
       },
       (error) => {
         //TOASTR ERROR

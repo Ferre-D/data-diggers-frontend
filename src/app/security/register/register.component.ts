@@ -79,8 +79,6 @@ export class RegisterComponent implements OnInit {
     );
   }
   public onAnimationEnd() {
-    console.log(localStorage.getItem('token'));
-
     this.ngZone.run(() => {
       this.router.navigate(['/dashboard']);
     });

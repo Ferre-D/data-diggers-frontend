@@ -91,7 +91,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   }
   public onPageChange(event: any) {
     this.pagination.CurrentPage = event.pageIndex + 1;
-    console.log(this.pagination.CurrentPage);
+
     this.activityService
       .getActivities(this.pagination.CurrentPage)
       .subscribe((result) => {
@@ -102,7 +102,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   }
   refactorData() {
     this.tableData = [];
-    console.log(this.activities);
 
     this.activities?.map((a) => {
       this.userService.getUserById(a.usersId).subscribe((result) => {

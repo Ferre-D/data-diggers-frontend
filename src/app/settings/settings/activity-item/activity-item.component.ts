@@ -16,8 +16,6 @@ export class ActivityItemComponent implements OnInit {
   constructor(private authServie: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.activity);
-    console.log(this.activity.usersId);
     this.dateString = new Date(this.activity.created_at).toLocaleDateString();
 
     this.authServie

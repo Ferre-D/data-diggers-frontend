@@ -91,8 +91,6 @@ export class DashboardComponent implements OnInit {
     { divider: 1e3, suffix: 'k' },
   ];
   filterDate(r: Date) {
-    console.log('here');
-
     this.dashboardService.getDashboardDataDate(r).subscribe((result) => {
       this.cars_passed = result.cars_passed;
       this.trucks_passed = result.trucks_passed;
@@ -166,13 +164,11 @@ export class DashboardComponent implements OnInit {
   getValuesByDay(data: passing_cars_2[]) {
     if (this.filterDaySelected > 0) {
       let date = new Date();
-      console.log('here');
 
       date.setDate(date.getDate() - this.filterDaySelected);
       data = data.filter((d) => new Date(d.timestamp) > date);
     }
     let DayCount = 0;
-    console.log(data.length);
 
     data.map((d) => {
       switch (new Date(d.timestamp || '').getDay()) {
