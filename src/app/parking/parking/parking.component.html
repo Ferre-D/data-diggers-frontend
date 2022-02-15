@@ -30,7 +30,9 @@
             [style.backgroundColor]="t.accentColor"
           ></div>
           <i class="fas fa-parking kpi-icon" [style.color]="t.accentColor"></i>
-          <div><p class="kpi-text">3/12</p></div>
+          <div>
+            <p class="kpi-text">{{ availableSpots }}/12</p>
+          </div>
           <div><p class="kpi-label">Cars Parked</p></div>
         </div>
       </div>
@@ -41,21 +43,23 @@
             [style.backgroundColor]="t.accentColor"
           ></div>
           <i class="fas fa-car kpi-icon" [style.color]="t.accentColor"></i>
-          <div><p class="kpi-text">214</p></div>
-          <div><p class="kpi-label">Total Cars Parked</p></div>
+          <div>
+            <p class="kpi-text">{{ totalCarsParked }}</p>
+          </div>
+          <div><p class="kpi-label">Total Cars reserved</p></div>
+          <small class="text-center">(All time)</small>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="graph mx-auto">
-          <canvas
-            baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [type]="barChartType"
-          >
-          </canvas>
+          <iframe
+            src="https://datastudio.google.com/embed/reporting/4a48041f-489a-4e70-a50d-9c564f0da6cb/page/bwvlC"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
@@ -74,13 +78,13 @@
               Your clients have the ability to reserve parking spots,<br />
               you can view them here.
             </p>
-            <button
+            <a
               [style.backgroundColor]="t.accentColor"
               [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
               class="btn btn-user float-right"
             >
               Visit reservations
-            </button>
+            </a>
           </div>
         </div>
       </div>

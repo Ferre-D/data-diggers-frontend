@@ -12,6 +12,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import * as ThemeActions from '../../../actions/theme.actions';
+import { ActivityService } from '../../activity.service';
 
 interface AppState {
   theme: Theme;
@@ -36,6 +37,7 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
   theme$: Subscription = new Subscription();
   postTheme$: Subscription = new Subscription();
   putTheme$: Subscription = new Subscription();
+  postActivity$: Subscription = new Subscription();
 
   themeForm = new FormGroup({
     id: new FormControl(0),
@@ -58,7 +60,8 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private router: Router,
     private themesService: ThemesService,
-    private angularFireStorage: AngularFireStorage
+    private angularFireStorage: AngularFireStorage,
+    private activityService: ActivityService
   ) {
     this.theme = store.select('theme');
     this.isAdd = this.router.url === '/settings/themes/newtheme';
@@ -131,10 +134,21 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
   submitData(): void {
     this.isSubmitted = true;
     if (this.isAdd) {
+      let tempId = 0;
       this.postTheme$ = this.themesService
         .postTheme(this.themeForm.value)
         .subscribe(
           (result) => {
+            tempId = result.id;
+            this.postActivity$ = this.activityService
+              .postActivities({
+                id: 0,
+                created_at: new Date(),
+                path: '/settings/themes/edittheme/' + tempId,
+                description: 'A theme has been created',
+                usersId: Number.parseInt(localStorage.getItem('id') || '1'),
+              })
+              .subscribe((result) => {});
             this.router.navigateByUrl('/settings/themes');
           },
           (error) => {
@@ -153,6 +167,15 @@ export class ThemesFormComponent implements OnInit, OnDestroy {
         .putTheme(this.themeId, this.themeForm.value)
         .subscribe(
           (result) => {
+            this.postActivity$ = this.activityService
+              .postActivities({
+                id: 0,
+                created_at: new Date(),
+                path: '/settings/themes/edittheme/' + this.themeId,
+                description: 'A theme has been edited',
+                usersId: Number.parseInt(localStorage.getItem('id') || '1'),
+              })
+              .subscribe((result) => {});
             this.router.navigateByUrl('/settings/themes');
           },
           (error) => {

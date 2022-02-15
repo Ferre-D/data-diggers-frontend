@@ -15,6 +15,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { StoreModule } from '@ngrx/store';
 import { themeReducer } from './reducers/theme.reducer';
 import { ParkingModule } from './parking/parking.module';
+import { filterReducer } from './reducers/filter.reducer';
+import { filterDayReducer } from './reducers/filterDay.reduces';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -29,7 +31,11 @@ import { ParkingModule } from './parking/parking.module';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    StoreModule.forRoot({ theme: themeReducer }),
+    StoreModule.forRoot({
+      theme: themeReducer,
+      filter: filterReducer,
+      filterDay: filterDayReducer,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

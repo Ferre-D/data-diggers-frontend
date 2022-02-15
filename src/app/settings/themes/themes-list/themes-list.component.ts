@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Theme } from '../theme';
 import { ThemesService } from '../themes.service';
 import * as ThemeActions from '../../../actions/theme.actions';
+import { ActivityService } from '../../activity.service';
 interface AppState {
   theme: Theme;
 }
@@ -17,7 +18,8 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private themesService: ThemesService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private activityService: ActivityService
   ) {
     this.theme = store.select('theme');
   }
@@ -26,6 +28,7 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   themes: Theme[] = [];
   themes$: Subscription = new Subscription();
   deleteTheme$: Subscription = new Subscription();
+  postActivity$: Subscription = new Subscription();
   theme!: Observable<Theme>;
   activeTheme!: Theme | undefined;
 
@@ -42,7 +45,15 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   delete(id: number) {
     this.deleteTheme$ = this.themesService.deleteTheme(id).subscribe(
       (result) => {
-        //all went well
+        this.postActivity$ = this.activityService
+          .postActivities({
+            id: 0,
+            created_at: new Date(),
+            path: '',
+            description: 'A theme has been removed',
+            usersId: Number.parseInt(localStorage.getItem('id') || '1'),
+          })
+          .subscribe((result) => {});
         this.getThemes();
       },
       (error) => {

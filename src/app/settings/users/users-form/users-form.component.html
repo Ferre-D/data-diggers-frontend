@@ -1,68 +1,85 @@
-<div class="w-50 mx-auto pt-5">
-  <form (ngSubmit)="onSubmit()" class="p-4" [formGroup]="userForm">
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="firstName">First Name</label>
+<div class="w-100 bg-light" *ngIf="theme | async as t">
+  <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
+    <h3
+      [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+      class="mt-2"
+    >
+      Users
+    </h3>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      Welcome to the
+      <span [style.color]="t.accentColor">user edit</span> page.
+    </p>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      Here you can edit the current selected user.
+    </p>
+  </div>
+  <div class="w-75 container mx-auto pt-5">
+    <form (ngSubmit)="onSubmit()" class="p-4" [formGroup]="userForm">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            required
+            class="form-control"
+            formControlName="firstName"
+            id="firstName"
+          />
+        </div>
+        <div class="form-group col">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            formControlName="lastName"
+            required
+            class="form-control"
+            id="lastName"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
         <input
           type="text"
+          formControlName="email"
           required
           class="form-control"
-          formControlName="firstName"
-          id="firstName"
+          id="email"
         />
       </div>
-      <div class="form-group col">
-        <label for="lastName">Last Name</label>
+      <div class="form-group">
+        <label for="password">Password</label>
         <input
-          type="text"
-          formControlName="lastName"
-          required
+          type="password"
+          formControlName="password"
           class="form-control"
-          id="lastName"
+          id="password"
         />
+        <small class="small" *ngIf="isEdit"
+          >Only fill this in if you want to edit the existing password!</small
+        >
       </div>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="text"
-        formControlName="email"
-        required
-        class="form-control"
-        id="email"
-      />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        id="password"
-      />
-      <small class="small" *ngIf="isEdit"
-        >Only fill this in if you want to edit the existing password!</small
+      <p class="m-0"><label for="isAdmin">Admin</label></p>
+      <div>
+        <mat-slide-toggle formControlName="userLevel"></mat-slide-toggle>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        *ngIf="isAdd"
+        [disabled]="!userForm.valid || isSubmitted"
       >
-    </div>
-    <p class="m-0"><label for="isAdmin">Admin</label></p>
-    <div>
-      <mat-slide-toggle formControlName="userLevel"></mat-slide-toggle>
-    </div>
-    <button
-      type="submit"
-      class="btn btn-primary mt-2"
-      *ngIf="isAdd"
-      [disabled]="!userForm.valid || isSubmitted"
-    >
-      Add
-    </button>
-    <button
-      type="submit"
-      class="btn btn-primary mt-2"
-      *ngIf="isEdit"
-      [disabled]="!userForm.valid || isSubmitted"
-    >
-      Save
-    </button>
-  </form>
+        Add
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        *ngIf="isEdit"
+        [disabled]="!userForm.valid || isSubmitted"
+      >
+        Save
+      </button>
+    </form>
+  </div>
 </div>

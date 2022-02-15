@@ -64,7 +64,7 @@
               [ngStyle]="settingsActive ? { color: t.accentColor } : {}"
             ></i>
           </div>
-          <div class="nav-text">Settings</div>
+          <div class="nav-text">Admin</div>
         </a>
       </div>
       <div
@@ -99,24 +99,45 @@
       </h3>
     </div>
     <div class="d-flex filter-days">
-      <div class="filter-active" [style.backgroundColor]="t.accentColor">
-        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      <div
+        [ngClass]="{ 'filter-active': filterAll }"
+        [style.backgroundColor]="t.accentColor"
+      >
+        <p
+          (click)="filter(-1)"
+          [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+        >
           All time
         </p>
       </div>
-      <div [style.backgroundColor]="t.accentColor">
-        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      <div
+        [ngClass]="{ 'filter-active': filter90 }"
+        [style.backgroundColor]="t.accentColor"
+      >
+        <p
+          (click)="filter(90)"
+          [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+        >
           90 Days
         </p>
       </div>
-      <div [style.backgroundColor]="t.accentColor">
-        <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      <div
+        [ngClass]="{ 'filter-active': filter30 }"
+        [style.backgroundColor]="t.accentColor"
+      >
+        <p
+          (click)="filter(30)"
+          [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+        >
           30 Days
         </p>
       </div>
     </div>
     <div class="demo-inline-calendar-card">
-      <mat-calendar [(selected)]="selected"></mat-calendar>
+      <mat-calendar
+        (selectedChange)="onChange($event)"
+        [(selected)]="selected"
+      ></mat-calendar>
     </div>
     <div class="w-100">
       <button

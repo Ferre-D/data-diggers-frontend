@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
         usersId: 0,
         description: '',
         created_at: new Date(),
-        action: '',
+        path: '',
       },
     ],
     userLevel: 2,

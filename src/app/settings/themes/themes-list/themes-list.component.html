@@ -140,7 +140,21 @@
                       |
                       <a (click)="edit(theme.id)" class="px-1 action"> Edit </a>
                       |
-                      <a (click)="delete(theme.id)" class="px-1 action">
+                      <a
+                        *ngIf="theme.active"
+                        #tooltip="matTooltip"
+                        matTooltip="Can't delete the active theme"
+                        [matTooltipPosition]="'above'"
+                        matTooltipHideDelay="3000"
+                        class="px-1 action disabled"
+                      >
+                        Delete
+                      </a>
+                      <a
+                        *ngIf="!theme.active"
+                        (click)="delete(theme.id)"
+                        class="px-1 action"
+                      >
                         Delete
                       </a>
                     </div>

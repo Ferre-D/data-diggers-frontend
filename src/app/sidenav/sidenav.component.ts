@@ -16,8 +16,17 @@ import { ThemesService } from '../settings/themes/themes.service';
 import { Theme } from '../settings/themes/theme';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
+
+import * as filterActions from '../actions/filter.actions';
+import * as filterDayActions from '../actions/filterday.actions';
+
+interface filterDay {
+  day: Date;
+  isSelected: Boolean;
+}
 interface AppState {
   theme: Theme;
+  filter: number;
 }
 @Component({
   selector: 'app-sidenav',
@@ -25,6 +34,11 @@ interface AppState {
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements AfterViewInit, OnInit {
+  filterDay!: filterDay;
+  filterAll = true;
+  filter30 = false;
+  filter90 = false;
+  date!: Date;
   themes$: Subscription = new Subscription();
   themes: Theme[] = [];
   theme!: Observable<Theme>;
@@ -59,7 +73,9 @@ export class SidenavComponent implements AfterViewInit, OnInit {
       this.disabledRight =
         this.path.includes('settings') ||
         this.path.includes('login') ||
-        this.path.includes('signup');
+        this.path.includes('signup') ||
+        this.path.includes('parking') ||
+        this.path.includes('extra');
       this.disabledLeft =
         this.path.includes('login') || this.path.includes('signup');
       this.hideBars =
@@ -69,12 +85,47 @@ export class SidenavComponent implements AfterViewInit, OnInit {
       this.settingsActive = this.path.includes('settings');
       this.parkingActive = this.path.includes('parking');
     });
+  }
+  onChange(event: any) {
+    this.resetFilter();
+    this.filterDay = { day: event, isSelected: true };
 
-    console.log(this.dashboardActive);
+    this.store.dispatch(new filterDayActions.EditFilterDay(this.filterDay));
   }
   ngOnInit(): void {}
   clearDate() {
+    this.resetFilter();
+    this.filterAll = true;
+    this.store.dispatch(new filterActions.EditFilter(-1));
     this.selected = null;
+    this.filterDay = { day: new Date(), isSelected: false };
+    this.store.dispatch(new filterDayActions.EditFilterDay(this.filterDay));
+  }
+  resetFilter() {
+    this.filterAll = false;
+    this.filter30 = false;
+    this.filter90 = false;
+  }
+
+  filter(days: number) {
+    this.selected = null;
+
+    this.resetFilter();
+    switch (days) {
+      case -1:
+        this.filterAll = true;
+
+        break;
+      case 30:
+        this.filter30 = true;
+        break;
+      case 90:
+        this.filter90 = true;
+        break;
+      default:
+        break;
+    }
+    this.store.dispatch(new filterActions.EditFilter(days));
   }
   reset() {
     this.dashboardActive = false;

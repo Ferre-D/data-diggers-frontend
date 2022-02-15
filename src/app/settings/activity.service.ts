@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Activity } from './activity';
 
@@ -8,10 +8,19 @@ import { Activity } from './activity';
 })
 export class ActivityService {
   constructor(private httpClient: HttpClient) {}
-  rootUrl: string = 'https://p40backend.azurewebsites.net/api/activities/';
+  rootUrl: string = 'https://p40backend.azurewebsites.net/api/activities';
+  // rootUrl: string = 'https://localhost:44316/api/activities/';
 
-  getActivities(): Observable<Activity[]> {
-    return this.httpClient.get<Activity[]>(this.rootUrl);
+  getActivities(page: number = 1): Observable<HttpResponse<Activity[]>> {
+    let headers = new HttpHeaders();
+    headers.append('Access-Control-Expose-Headers', 'x-pagination');
+    return this.httpClient.get<Activity[]>(
+      this.rootUrl + '?pagenumber=' + page,
+      {
+        observe: 'response',
+        headers,
+      }
+    );
   }
   postActivities(activity: Activity): Observable<Activity> {
     let headers = new HttpHeaders();

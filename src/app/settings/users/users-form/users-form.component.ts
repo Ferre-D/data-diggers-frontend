@@ -1,12 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { AuthService } from 'src/app/security/auth.service';
 import { Activity } from '../../activity';
 import { ActivityService } from '../../activity.service';
+import { Theme } from '../../themes/theme';
 import { UserService } from '../user.service';
 
+interface AppState {
+  theme: Theme;
+}
 @Component({
   selector: 'app-users-form',
   templateUrl: './users-form.component.html',
@@ -18,7 +24,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   userId: number = 0;
   activity: Activity = {
     id: 0,
-    action: '',
+    path: '',
     created_at: new Date(),
     description: '',
     usersId: 2,
@@ -30,8 +36,10 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   user$: Subscription = new Subscription();
   postUser$: Subscription = new Subscription();
   putUser$: Subscription = new Subscription();
+  postActivity$: Subscription = new Subscription();
 
   $postActivity: Subscription = new Subscription();
+  theme!: Observable<Theme>;
 
   userForm = new FormGroup({
     id: new FormControl(0),
@@ -43,12 +51,15 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     activities: new FormControl([]),
   });
   constructor(
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
     private userService: UserService,
     private activityService: ActivityService
   ) {
+    this.theme = store.select('theme');
+
     this.isAdd = this.router.url === '/settings/users/newuser';
 
     this.isEdit = !this.isAdd;
@@ -92,9 +103,25 @@ export class UsersFormComponent implements OnInit, OnDestroy {
       });
     }
     this.isSubmitted = true;
+    let tempId = 0;
     if (this.isAdd) {
       this.postUser$ = this.userService.postUser(this.userForm.value).subscribe(
         (result) => {
+          tempId = result.id;
+          this.postActivity$ = this.activityService
+            .postActivities({
+              id: 0,
+              created_at: new Date(),
+              path: '/settings/users/edituser/' + tempId,
+              description:
+                'The user ' +
+                this.userForm.value.firstName +
+                ' ' +
+                this.userForm.value.lastName +
+                ' has been created',
+              usersId: Number.parseInt(localStorage.getItem('id') || '1'),
+            })
+            .subscribe((result) => {});
           this.router.navigateByUrl('/settings/users');
         },
         (error) => {
@@ -111,6 +138,22 @@ export class UsersFormComponent implements OnInit, OnDestroy {
         .putUser(this.userId, this.userForm.value)
         .subscribe(
           (result) => {
+            this.postActivity$ = this.activityService
+              .postActivities({
+                id: 0,
+                created_at: new Date(),
+                path: '/settings/users/edituser/' + this.userId,
+                description:
+                  'The user ' +
+                  this.userForm.value.firstName +
+                  ' ' +
+                  this.userForm.value.lastName +
+                  ' has been edited',
+                usersId: Number.parseInt(localStorage.getItem('id') || '1'),
+              })
+              .subscribe((result) => {
+                console.log(result);
+              });
             this.router.navigateByUrl('/settings/users');
           },
           (error) => {

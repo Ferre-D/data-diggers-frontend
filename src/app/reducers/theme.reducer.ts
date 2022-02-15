@@ -18,7 +18,6 @@ const newstate = (state: Theme, newData: Theme) => {
 };
 
 export function themeReducer(state: any = defaultTheme, action: any) {
-  console.log(action.type, state);
   switch (action.type) {
     case ThemeActions.EDIT_THEME:
       return newstate(state, action.payload);

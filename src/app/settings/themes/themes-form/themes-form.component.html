@@ -1,99 +1,126 @@
-<div class="w-50 mx-auto pt-5" *ngIf="theme | async as t">
-  <form (ngSubmit)="onSubmit()" class="p-4 style-form" [formGroup]="themeForm">
-    <div class="">
-      <label class="form-label" for="logo">Logo</label>
-      <input
-        type="file"
-        id="logo"
-        class="form-control-file"
-        (change)="onImageSelected($event)"
-        accept=".png, .jpg"
-      />
-      <div class="logo" *ngIf="imageSrc">
-        <img src="{{ imageSrc }}" alt="logo" />
-      </div>
-    </div>
-    <div class="text-primary">
-      <i class="fas fa-info-circle"></i> Please make sure the accent color is
-      readable when placed on top of the primary color. Check the example for
-      reference.
-    </div>
-    <div class="form-row my-2">
-      <div class="col d-flex align-items-center">
-        <label class="m-0 mx-2">Primary color</label>
-        <div>
-          <ngx-colors
-            ngx-colors-trigger
-            formControlName="primaryColor"
-          ></ngx-colors>
-        </div>
-      </div>
-      <div class="col d-flex align-items-center">
-        <label class="m-0 mx-2">Accent color</label>
-        <div>
-          <ngx-colors
-            ngx-colors-trigger
-            formControlName="accentColor"
-          ></ngx-colors>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div><label for="textWhite">White text: </label></div>
-      <mat-slide-toggle formControlName="textWhite"></mat-slide-toggle>
-    </div>
-    <button
-      type="submit"
-      class="btn"
-      *ngIf="isAdd"
-      [disabled]="!themeForm.valid || isSubmitted"
-    >
-      Add
-    </button>
-    <button
-      type="submit"
+<div class="w-100 bg-light" *ngIf="theme | async as t">
+  <div class="w-100 welcome p-4 pt-4" [style.backgroundColor]="t.primaryColor">
+    <h3
       [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
-      [style.backgroundColor]="t.accentColor"
-      class="btn"
-      *ngIf="isEdit"
-      [disabled]="!themeForm.valid || isSubmitted"
+      class="mt-2"
     >
-      Save
-    </button>
-    <div class="mb-2 mt-4">
-      <mat-progress-bar
-        mode="determinate"
-        value="{{ uploadProgress }}"
-      ></mat-progress-bar>
-    </div>
-  </form>
-</div>
-<div class="reference">
-  <h3>Banners:</h3>
-  <div
-    [ngStyle]="
-      themeForm.value.textWhite ? { color: 'white' } : { color: 'black' }
-    "
-    [style.backgroundColor]="themeForm.value.primaryColor"
-  >
-    <p class="m-0 p-2">
-      Take a look at this
-      <span class="" [style.color]="themeForm.value.accentColor">
-        reference
-      </span>
-      and make sure the text is readable
+      Theme
+    </h3>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      Welcome to the
+      <span [style.color]="t.accentColor">theme edit</span> page.
+    </p>
+    <p [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }">
+      Here you can edit the current selected theme.
     </p>
   </div>
-</div>
-<div class="reference">
-  <h3>Buttons:</h3>
-  <button
-    class="btn"
-    [style.backgroundColor]="themeForm.value.accentColor"
-    [ngStyle]="
-      themeForm.value.textWhite ? { color: 'white' } : { color: 'black' }
-    "
-  >
-    Example button
-  </button>
+  <div class="w-75 mx-auto pt-5 container">
+    <form
+      (ngSubmit)="onSubmit()"
+      class="p-4 style-form"
+      [formGroup]="themeForm"
+    >
+      <div class="form-row">
+        <div class="col form-group">
+          <label class="form-label" for="logo">Logo</label>
+          <input
+            type="file"
+            id="logo"
+            class="form-control-file"
+            (change)="onImageSelected($event)"
+            accept=".png, .jpg"
+          />
+        </div>
+        <div class="col form-group"></div>
+        <div class="logo" *ngIf="imageSrc">
+          <img src="{{ imageSrc }}" alt="logo" />
+        </div>
+      </div>
+      <hr />
+      <div class="" [style.color]="t.accentColor">
+        <i class="fas fa-info-circle"></i> Please make sure the accent color is
+        readable when placed on top of the primary color. Check the example for
+        reference.
+      </div>
+      <div class="form-row my-2">
+        <div class="col d-flex align-items-center">
+          <label class="m-0 mr-2">Primary color</label>
+          <div>
+            <ngx-colors
+              ngx-colors-trigger
+              formControlName="primaryColor"
+            ></ngx-colors>
+          </div>
+        </div>
+        <div class="col d-flex align-items-center">
+          <label class="m-0 mr-2">Accent color</label>
+          <div>
+            <ngx-colors
+              ngx-colors-trigger
+              formControlName="accentColor"
+            ></ngx-colors>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="form-group">
+        <div><label for="textWhite">White text: </label></div>
+        <mat-slide-toggle formControlName="textWhite"></mat-slide-toggle>
+      </div>
+      <hr />
+      <button
+        type="submit"
+        class="btn"
+        *ngIf="isAdd"
+        [disabled]="!themeForm.valid || isSubmitted"
+      >
+        Add
+      </button>
+      <button
+        type="submit"
+        [ngStyle]="t.textWhite ? { color: 'white' } : { color: 'black' }"
+        [style.backgroundColor]="t.accentColor"
+        class="btn"
+        *ngIf="isEdit"
+        [disabled]="!themeForm.valid || isSubmitted"
+      >
+        Save
+      </button>
+      <div class="mb-2 mt-4">
+        <mat-progress-bar
+          mode="determinate"
+          value="{{ uploadProgress }}"
+        ></mat-progress-bar>
+      </div>
+    </form>
+  </div>
+  <div class="reference">
+    <h3>Banners:</h3>
+    <div
+      [ngStyle]="
+        themeForm.value.textWhite ? { color: 'white' } : { color: 'black' }
+      "
+      [style.backgroundColor]="themeForm.value.primaryColor"
+    >
+      <p class="m-0 p-2">
+        Take a look at this
+        <span class="" [style.color]="themeForm.value.accentColor">
+          reference
+        </span>
+        and make sure the text is readable
+      </p>
+    </div>
+  </div>
+  <div class="reference">
+    <h3>Buttons:</h3>
+    <button
+      class="btn"
+      [style.backgroundColor]="themeForm.value.accentColor"
+      [ngStyle]="
+        themeForm.value.textWhite ? { color: 'white' } : { color: 'black' }
+      "
+    >
+      Example button
+    </button>
+  </div>
 </div>

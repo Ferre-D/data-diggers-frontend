@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { AuthService } from 'src/app/security/auth.service';
 import { count } from '../count';
 import { Theme } from './theme';
 

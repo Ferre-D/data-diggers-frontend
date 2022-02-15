@@ -1,3 +1,14 @@
+.welcome {
+  height: 240px;
+  p {
+    margin: 0;
+  }
+}
+.bg-light {
+  background: #e8e7ec;
+  min-height: 100vh;
+}
+
 .switch {
   position: relative;
   display: inline-block;

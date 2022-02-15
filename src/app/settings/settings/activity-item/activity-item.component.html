@@ -9,17 +9,14 @@
     </div>
     <div>
       <p>
-        <span [ngClass]="activity.action">
-          {{ activity.action }}
+        <span [ngClass]="activity.path">
+          {{ activity.path }}
         </span>
         {{ activity.description }}
       </p>
     </div>
     <div class="m-0 ml-auto">
-      <a
-        *ngIf="activity.action"
-        (click)="detail()"
-        class="text-rd-green view-btn"
+      <a *ngIf="activity.path" (click)="detail()" class="text-rd-green view-btn"
         ><strong>View</strong></a
       >
     </div>

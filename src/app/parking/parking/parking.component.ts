@@ -6,6 +6,7 @@ import { ChartType, ChartData, Color, ChartConfiguration } from 'chart.js';
 
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { ParkingService } from '../parking.service';
 interface AppState {
   theme: Theme;
 }
@@ -21,9 +22,13 @@ interface AppState {
   `,
 })
 export class ParkingComponent implements OnInit {
+  totalCarsParked: number = 0;
   theme!: Observable<Theme>;
-
-  constructor(private store: Store<AppState>) {
+  availableSpots: number = 0;
+  constructor(
+    private store: Store<AppState>,
+    private parkingService: ParkingService
+  ) {
     this.theme = store.select('theme');
   }
   live: AnimationOptions = {
@@ -78,5 +83,12 @@ export class ParkingComponent implements OnInit {
   };
   animationCreated(animationItem: AnimationItem): void {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.parkingService.getLiveData().subscribe((result) => {
+      this.availableSpots = 12 - result[result.length - 1].free_spots;
+    });
+    this.parkingService.getParkingSpots().subscribe((result) => {
+      this.totalCarsParked = result.length;
+    });
+  }
 }
